@@ -6,29 +6,20 @@ using System.Threading.Tasks;
 
 namespace FileTextSearcher
 {
-    public class DataSorter<T>
+    public class DataSorter<T> where T : IComparable
     {
         /// <summary>
         /// The IEnumerable of <typeparamref name="T"/> this class instance will sort
         /// </summary>
-        public IEnumerable<T> DataStruct { get; private set; }
+        public IList<T> DataStruct { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of the class with <paramref name="DataList"/> of type <typeparamref name="T"/>
+        /// Creates a new instance of the class with <paramref name="DataIList"/> of type <typeparamref name="T"/>
         /// </summary>
-        /// <param name="DataList">The List of type <typeparamref name="T"/> to sort</param>
-        public DataSorter(List<T> DataList)
+        /// <param name="DataIList">The IList of type <typeparamref name="T"/> to sort</param>
+        public DataSorter(IList<T> DataIList)
         {
-            DataStruct = DataList;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the class with <paramref name="DataArray"/> of type <typeparamref name="T"/>
-        /// </summary>
-        /// <param name="DataArray">The Array of type <typeparamref name="T"/> to sort</param>
-        public DataSorter(T[] DataArray)
-        {
-            DataStruct = DataArray;
+            DataStruct = DataIList;
         }
 
         /// <summary>
@@ -36,7 +27,7 @@ namespace FileTextSearcher
         /// </summary>
         public void SortAscending()
         {
-
+            DataStruct = DataStruct.OrderBy(s => s).ToList();
         }
 
         /// <summary>
@@ -44,8 +35,7 @@ namespace FileTextSearcher
         /// </summary>
         public void SortDescending()
         {
-
+            DataStruct = DataStruct.OrderByDescending(s => s).ToList();
         }
-
     }
 }
