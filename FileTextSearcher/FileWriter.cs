@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,8 @@ namespace FileTextSearcher
 {
     public class FileWriter
     {
-        public void WriteToFile()
+        public void WriteToFile(StreamWriter file)
         {
-
         }
 
         /// <summary>
@@ -42,10 +42,9 @@ namespace FileTextSearcher
             else
             {
                 string newFilePath = Path.Combine(filePath, newFileName + ".txt");
-                using (FileStream fs = File.Create(newFilePath))
+                using (StreamWriter sw = new StreamWriter(newFilePath))
                 {
-                    //write to file implementation
-                    //write to file implementation
+                    WriteToFile(sw);
                 }
             }
 
