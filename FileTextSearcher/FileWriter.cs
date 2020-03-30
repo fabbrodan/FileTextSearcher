@@ -11,17 +11,30 @@ namespace FileTextSearcher
 {
     public class FileWriter
     {
-        private void WriteToFile(StreamWriter file)
+        /// <summary>
+        /// Writes every value from the sorted list into a given file
+        /// </summary>
+        /// <param name="file">The file created in the SaveFile method to be written in</param>
+        /// <param name="sortedListOfWords">IList of sorted words to write to a file</param>
+        private void WriteToFile(StreamWriter file, IList<string> sortedListOfWords)
         {
-
+            for (int i = 0; i < sortedListOfWords.Count(); i++)
+            {
+                if (sortedListOfWords[i] != null)
+                {
+                    file.WriteLine(sortedListOfWords[i]);
+                }
+            }
         }
 
         /// <summary>
         /// Takes filepath and filename as parameters and saves a sorted file as a .txt file
         /// </summary>
-        /// <param name="filePath">Desired path</param>
-        /// <param name="newFileName">Desired filename</param>
-        public void SaveFile(string filePath, string newFileName)
+        /// <param name="filePath">Path to save in</param>
+        /// <param name="newFileName">Name of file to save</param>
+        /// <param name="sortedListOfWords">Data strucutre to write to file</param>
+
+        public void SaveFile(string filePath, string newFileName, IList<string> sortedListOfWords)
         {
             Regex rx = new Regex("[<>\\?:*/\" |]");
             if (filePath == null || newFileName == null)
@@ -30,7 +43,7 @@ namespace FileTextSearcher
             }
             else if (!Directory.Exists(filePath))
             {
-                throw new ArgumentException("Invalid filepath");
+                throw new ArgumentException("Invalid file path");
             }
             else if (rx.IsMatch(newFileName))
             {
@@ -40,12 +53,16 @@ namespace FileTextSearcher
             {
                 throw new ArgumentException("File name cannot be empty");
             }
+            else if (sortedListOfWords == null || sortedListOfWords.Count() < 1)
+            {
+                throw new ArgumentException("Sorted list cannot be null or empty");
+            }
             else
             {
                 string newFilePath = Path.Combine(filePath, newFileName + ".txt");
                 using (StreamWriter sw = new StreamWriter(newFilePath))
                 {
-                    WriteToFile(sw);
+                    WriteToFile(sw, sortedListOfWords);
                 }
             }
 
