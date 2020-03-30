@@ -37,5 +37,40 @@ namespace FileTextSearcher
         {
             DataStruct = DataStruct.OrderByDescending(s => s).ToList();
         }
+
+        public void QuickSort(int low, int high)
+        {
+            if (low < high)
+            {
+                int pi = Partition(low, high);
+
+                QuickSort(low, pi - 1);
+                QuickSort(pi + 1, high);
+            }
+        }
+
+        private int Partition(int low, int high)
+        {
+            T pivot = DataStruct[high];
+            int i = low - 1;
+
+            for (int j = low; j <= high - 1; j++)
+            {
+                int comparison = DataStruct[j].CompareTo(pivot);
+                if (comparison < 0)
+                {
+                    i++;
+                    T temp = DataStruct[i];
+                    DataStruct[i] = DataStruct[j];
+                    DataStruct[j] = temp;
+                }
+            }
+
+            T temp2 = DataStruct[i + 1];
+            DataStruct[i + 1] = DataStruct[high];
+            DataStruct[high] = temp2;
+
+            return i + 1;
+        }
     }
 }
