@@ -38,7 +38,14 @@ namespace FileTextSearcher
             DataStruct = DataStruct.OrderByDescending(s => s).ToList();
         }
 
-        public void QuickSort(int low, int high)
+        public void QuickSort()
+        {
+            int low = 0, high = DataStruct.Count - 1;
+
+            QuickSort(low, high);
+        }
+
+        private void QuickSort(int low, int high)
         {
             if (low < high)
             {
