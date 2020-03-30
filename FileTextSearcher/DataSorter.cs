@@ -9,9 +9,18 @@ namespace FileTextSearcher
     public class DataSorter<T> where T : IComparable
     {
         /// <summary>
-        /// The IEnumerable of <typeparamref name="T"/> this class instance will sort
+        /// The IList of <typeparamref name="T"/> this class instance will sort
         /// </summary>
-        public IList<T> DataStruct { get; private set; }
+        private IList<T> DataStruct;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The DataList of this instance of DataSorter</returns>
+        public IList<T> Get()
+        {
+            return DataStruct;
+        }
 
         /// <summary>
         /// Creates a new instance of the class with <paramref name="DataIList"/> of type <typeparamref name="T"/>
