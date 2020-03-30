@@ -11,8 +11,9 @@ namespace FileTextSearcher
 {
     public class FileWriter
     {
-        public void WriteToFile(StreamWriter file)
+        private void WriteToFile(StreamWriter file)
         {
+
         }
 
         /// <summary>
@@ -35,9 +36,9 @@ namespace FileTextSearcher
             {
                 throw new ArgumentException("Invalid character in file name");
             }
-            else if (newFileName == "") {
+            else if (newFileName == "")
+            {
                 throw new ArgumentException("File name cannot be empty");
-
             }
             else
             {
