@@ -23,7 +23,7 @@ namespace FileTextSearcher
         }
 
         /// <summary>
-        /// Sorts the IEnumerable of <typeparamref name="T"/> <paramref name="DataStruct"/> in ascending fashion
+        /// Sorts the IList of <typeparamref name="T"/> <paramref name="DataStruct"/> in ascending fashion
         /// </summary>
         public void SortAscending()
         {
@@ -31,13 +31,16 @@ namespace FileTextSearcher
         }
 
         /// <summary>
-        /// Sorts the IEnumerable of <typeparamref name="T"/> <paramref name="DataStruct"/> in descending fashion
+        /// Sorts the IList of <typeparamref name="T"/> <paramref name="DataStruct"/> in descending fashion
         /// </summary>
         public void SortDescending()
         {
             DataStruct = DataStruct.OrderByDescending(s => s).ToList();
         }
 
+        /// <summary>
+        /// Uses Quick Sort algorithm to sort the <paramref name="DataStruct"/> in ascending fashion
+        /// </summary>
         public void QuickSortAscending()
         {
             int low = 0, high = DataStruct.Count - 1;
@@ -45,6 +48,11 @@ namespace FileTextSearcher
             QuickSortAscending(low, high);
         }
 
+        /// <summary>
+        /// Internal method for Quick sorting used for recursion
+        /// </summary>
+        /// <param name="low">The low boundary index for quick sort algorithm</param>
+        /// <param name="high">The high boundary index for quick sort algorithm</param>
         private void QuickSortAscending(int low, int high)
         {
             if (low < high)
@@ -56,6 +64,12 @@ namespace FileTextSearcher
             }
         }
 
+        /// <summary>
+        /// The partitioning method used recursively by quick sort to switch elements and provide new pivot index
+        /// </summary>
+        /// <param name="low">The low boundary index for the sub list to be partitioned</param>
+        /// <param name="high">The high boundary index for the sub list to be partitioned</param>
+        /// <returns>Next partition index in full list</returns>
         private int PartitionAscending(int low, int high)
         {
             T pivot = DataStruct[high];
@@ -80,6 +94,9 @@ namespace FileTextSearcher
             return i + 1;
         }
 
+        /// <summary>
+        /// Uses Quick Sort algorithm to sort the <paramref name="DataStruct"/> in descending fashion
+        /// </summary>
         public void QuickSortDescending()
         {
             int low = 0, high = DataStruct.Count - 1;
@@ -87,6 +104,11 @@ namespace FileTextSearcher
             QuickSortDescending(low, high);
         }
 
+        /// <summary>
+        /// Internal method for Quick sorting used for recursion
+        /// </summary>
+        /// <param name="low">The low boundary index for quick sort algorithm</param>
+        /// <param name="high">The high boundary index for quick sort algorithm</param>
         private void QuickSortDescending(int low, int high)
         {
             if (low < high)
@@ -98,6 +120,12 @@ namespace FileTextSearcher
             }
         }
 
+        /// <summary>
+        /// The partitioning method used recursively by quick sort to switch elements and provide new pivot index
+        /// </summary>
+        /// <param name="low">The low boundary index for the sub list to be partitioned</param>
+        /// <param name="high">The high boundary index for the sub list to be partitioned</param>
+        /// <returns>Next partition index in full list</returns>
         private int PartitionDescending(int low, int high)
         {
             T pivot = DataStruct[high];
