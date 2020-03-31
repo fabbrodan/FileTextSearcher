@@ -1,0 +1,9 @@
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\bin\Debug\FileTextSearcher.exe.config
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\bin\Debug\FileTextSearcher.exe
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\bin\Debug\FileTextSearcher.pdb
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.csprojAssemblyReference.cache
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.Properties.Resources.resources
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.csproj.GenerateResource.cache
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.exe
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.pdb
+C:\Users\david\Desktop\filetext\FileTextSearcher\FileTextSearcher\obj\Debug\FileTextSearcher.Form1.resources
