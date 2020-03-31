@@ -23,9 +23,17 @@ namespace FileTextSearcher
         //This method opens a FileDialog where you can browse and open one or multiple files.
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
+            openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                try
+                {
+                }
+                catch (ArgumentException)
+                {
+
+                }
                 int counter = 0;
                 foreach (var item in openFileDialog.FileNames)
                 {
