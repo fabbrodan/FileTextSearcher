@@ -19,6 +19,8 @@ namespace FileTextSearcher
             InitializeComponent();
         }
 
+
+        //This method opens a FileDialog where you can browse and open one or multiple files.
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog.ShowDialog();
