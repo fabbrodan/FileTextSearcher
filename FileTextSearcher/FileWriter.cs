@@ -30,40 +30,48 @@ namespace FileTextSearcher
         /// <summary>
         /// Takes filepath and filename as parameters and saves a sorted file as a .txt file
         /// </summary>
-        /// <param name="filePath">Path to save in</param>
-        /// <param name="newFileName">Name of file to save</param>
+        /// <param name="filePath">Desired file path</param>
+        /// <param name="fileName">Desired file name</param>
         /// <param name="sortedListOfWords">Data strucutre to write to file</param>
-
-        public void SaveFile(string filePath, string newFileName, IList<string> sortedListOfWords)
+        public void SaveFile(string filePath, string fileName, IList<string> sortedListOfWords)
         {
-            Regex rx = new Regex("[<>\\?:*/\" |]");
-            if (filePath == null || newFileName == null)
+            try
             {
-                throw new ArgumentNullException("File path and file name cannot be null");
-            }
-            else if (!Directory.Exists(filePath))
-            {
-                throw new ArgumentException("Invalid file path");
-            }
-            else if (rx.IsMatch(newFileName))
-            {
-                throw new ArgumentException("Invalid character in file name");
-            }
-            else if (newFileName == "")
-            {
-                throw new ArgumentException("File name cannot be empty");
-            }
-            else if (sortedListOfWords == null || sortedListOfWords.Count() < 1)
-            {
-                throw new ArgumentException("Sorted list cannot be null or empty");
-            }
-            else
-            {
-                string newFilePath = Path.Combine(filePath, newFileName + ".txt");
-                using (StreamWriter sw = new StreamWriter(newFilePath))
+                if (filePath != null && fileName!=null && sortedListOfWords != null )
                 {
-                    WriteToFile(sw, sortedListOfWords);
+                    if (fileName != "")
+                    {
+                        string newFilePath = Path.Combine(filePath, fileName + ".txt");
+                        using (StreamWriter sw = new StreamWriter(newFilePath))
+                        {
+                            WriteToFile(sw, sortedListOfWords);
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException();
+                    }
                 }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                throw e;
+            }
+            catch (ArgumentException e)
+            {
+                throw e;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                throw e;
+            }
+            catch (IOException e)
+            {
+                throw e;
             }
 
         }
