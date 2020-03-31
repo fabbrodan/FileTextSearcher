@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTextSearcher", "FileTextSearcher\FileTextSearcher.csproj", "{F4C0CD72-1729-406A-9CC4-0B3B37811B6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingTesting", "SortingTesting\SortingTesting.csproj", "{34C435E2-FE7E-42E9-AC7E-41C3005EFD24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsFileBrower", "..\TestsFileBrower\TestsFileBrower.csproj", "{12DB0B46-1D76-4C9F-ABE5-99E2EF39AE49}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
