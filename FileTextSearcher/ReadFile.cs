@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FileTextSearcher
@@ -14,9 +15,12 @@ namespace FileTextSearcher
 
         public ReadFile(string fileName, string fileContent)
         {
-            Words = fileContent.Split(new[] { "\r\n", "\r", "\n", " " },StringSplitOptions.None);
+            fileContent = fileContent.ToLower();
+            fileContent = Regex.Replace(fileContent, "[^a-zA-Z0-9._]", " ");
+            Words = fileContent.Split(new[] { "\r\n", "\r", "\n", ".", "?", "!", " ", ";", ":", ",", "(", ")" },StringSplitOptions.RemoveEmptyEntries);
             NumberOfWords = Words.Count();
             FileName = fileName;
         }
+
     }
 }
