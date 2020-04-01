@@ -14,6 +14,7 @@ namespace FileTextSearcher
     public partial class Form1 : Form
     {
         private static List<ReadFile> readFiles = new List<ReadFile>();
+        private static List<IList<string>> SortedWords = new List<IList<string>>();
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +42,9 @@ namespace FileTextSearcher
                     {
                         string text = File.ReadAllText(item);
                         ReadFile readFile = new ReadFile(openFileDialog.FileNames[counter], text);
+                        DataSorter<string> sorter = new DataSorter<string>(readFile.Words);
+                        sorter.QuickSortAscending();
+                        SortedWords.Add(sorter.Get());
                         readFiles.Add(readFile);
                     }
                     catch (IOException)
@@ -48,12 +52,21 @@ namespace FileTextSearcher
                     }
                     counter++;
                 }
+                DisplaySortResult();
             }
         }
 
         private void DisplaySortResult()
         {
-
+            int colCounter = 0;
+            foreach (var list in SortedWords)
+            {   
+                foreach (var word in list)
+                {
+                    listBox1.Items.Add(new { word, readFiles[colCounter].FileName });
+                }
+                colCounter++;
+            }
         }
     }
 }
