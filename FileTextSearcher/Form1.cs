@@ -52,14 +52,21 @@ namespace FileTextSearcher
 
         private void DisplaySortResult()
         {
-            int colCounter = 0;
-            foreach (var list in SortedWords)
-            {   
-                foreach (var word in list)
+            foreach (var file in readFiles)
+            {
+                dataGridView1.Columns.Add(new DataGridViewColumn {
+                    HeaderText = file.FileName
+                });
+            }
+
+            DataGridViewRowCollection rowCollection = new DataGridViewRowCollection(dataGridView1);
+
+            for (int i = 0; i < SortedWords.Count - 1; i++)
+            {
+                foreach (var word in SortedWords[i])
                 {
-                    listBox1.Items.Add(new { word, readFiles[colCounter].FileName });
+                    
                 }
-                colCounter++;
             }
         }
     }
