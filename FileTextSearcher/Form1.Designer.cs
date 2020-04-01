@@ -30,6 +30,7 @@
         {
             this.btnAddFiles = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // btnAddFiles
@@ -47,11 +48,21 @@
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Multiselect = true;
             // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(192, 13);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(192, 425);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.btnAddFiles);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -63,6 +74,7 @@
 
         private System.Windows.Forms.Button btnAddFiles;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

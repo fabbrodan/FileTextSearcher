@@ -50,5 +50,10 @@ namespace FileTextSearcher
                 }
             }
         }
+
+        private void DisplaySortResult()
+        {
+
+        }
     }
 }
