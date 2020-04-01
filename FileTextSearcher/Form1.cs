@@ -28,13 +28,6 @@ namespace FileTextSearcher
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                try
-                {
-                }
-                catch (ArgumentException)
-                {
-
-                }
                 int counter = 0;
                 foreach (var item in openFileDialog.FileNames)
                 {
@@ -47,8 +40,9 @@ namespace FileTextSearcher
                         SortedWords.Add(sorter.Get());
                         readFiles.Add(readFile);
                     }
-                    catch (IOException)
+                    catch (IOException ex)
                     {
+                        MessageBox.Show(ex.Message);
                     }
                     counter++;
                 }
