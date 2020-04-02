@@ -46,6 +46,19 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Multiselect = true;
+            this.saveFileButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.SuspendLayout();
+            // 
+            // saveFileButton
+            // 
+            this.saveFileButton.Location = new System.Drawing.Point(713, 415);
+            this.saveFileButton.Name = "saveFileButton";
+            this.saveFileButton.Size = new System.Drawing.Size(75, 23);
+            this.saveFileButton.TabIndex = 0;
+            this.saveFileButton.Text = "Save File";
+            this.saveFileButton.UseVisualStyleBackColor = true;
+            this.saveFileButton.Click += new System.EventHandler(this.saveFileButton_Click);
             // 
             // Form1
             // 
@@ -53,6 +66,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnAddFiles);
+            this.Controls.Add(this.saveFileButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -63,6 +77,8 @@
 
         private System.Windows.Forms.Button btnAddFiles;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button saveFileButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
