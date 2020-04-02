@@ -50,6 +50,9 @@ namespace FileTextSearcher
             }
         }
 
+        /// <summary>
+        /// Takes the sorted file text results and displays in a DataGridView
+        /// </summary>
         private void DisplaySortResult()
         {
             int maxNumberOfWords = 0;
