@@ -43,6 +43,7 @@ namespace FileTextSearcher
                     counter++;
                 }
             }
+        }
         private void saveFileButton_Click(object sender, EventArgs e)
         {
             FileWriter fw = new FileWriter();

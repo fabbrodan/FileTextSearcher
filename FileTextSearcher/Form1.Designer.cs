@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.btnAddFiles = new System.Windows.Forms.Button();
+            this.saveFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // btnAddFiles
@@ -42,14 +44,6 @@
             this.btnAddFiles.UseVisualStyleBackColor = true;
             this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            this.openFileDialog.Multiselect = true;
-            this.saveFileButton = new System.Windows.Forms.Button();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.SuspendLayout();
-            // 
             // saveFileButton
             // 
             this.saveFileButton.Location = new System.Drawing.Point(713, 415);
@@ -59,6 +53,10 @@
             this.saveFileButton.Text = "Save File";
             this.saveFileButton.UseVisualStyleBackColor = true;
             this.saveFileButton.Click += new System.EventHandler(this.saveFileButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // Form1
             // 
@@ -76,8 +74,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddFiles;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button saveFileButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
