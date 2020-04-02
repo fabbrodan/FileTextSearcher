@@ -52,20 +52,40 @@ namespace FileTextSearcher
 
         private void DisplaySortResult()
         {
+            int maxNumberOfWords = 0;
             foreach (var file in readFiles)
             {
-                dataGridView1.Columns.Add(new DataGridViewColumn {
-                    HeaderText = file.FileName
+                dataGridView1.Columns.Add(new DataGridViewColumn
+                {
+                    HeaderText = Path.GetFileNameWithoutExtension(file.FileName),
+                    CellTemplate = new DataGridViewTextBoxCell()
                 });
+
+                if (file.NumberOfWords > maxNumberOfWords)
+                {
+                    maxNumberOfWords = file.NumberOfWords;
+                }
             }
 
-            DataGridViewRowCollection rowCollection = new DataGridViewRowCollection(dataGridView1);
-
-            for (int i = 0; i < SortedWords.Count - 1; i++)
+            for (int i = 0; i < maxNumberOfWords; i++)
             {
-                foreach (var word in SortedWords[i])
+                dataGridView1.Rows.Add(new DataGridViewRow());
+            }
+
+            for (int i = 0; i <= SortedWords.Count -1; i++)
+            {
+                for (int j = 0; j < maxNumberOfWords; j++)
                 {
-                    
+                    try
+                    {
+                        dataGridView1.Rows[j].Cells[i].Value = SortedWords[i][j];
+                        dataGridView1.Rows[j].Cells[i].ReadOnly = true;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        dataGridView1.Rows[j].Cells[i].Value = "";
+                        dataGridView1.Rows[j].Cells[i].ReadOnly = true;
+                    }
                 }
             }
         }
