@@ -96,17 +96,30 @@ namespace FileTextSearcher
         {
             FileWriter fw = new FileWriter();
 
-            saveFileDialog.Filter = "Text Files|*.txt";
-            //select file rather than index 0 in readFiles
-            saveFileDialog.FileName = Path.GetFileNameWithoutExtension(readFiles[0].FileName)+"_sorted";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            // Verify that there are files loaded
+            if (readFiles.Count > 0)
             {
-                string fullPath = saveFileDialog.FileName;
-                string fileName = Path.GetFileNameWithoutExtension(fullPath);
-                string fullDirectoryPath = Path.GetDirectoryName(fullPath);
-                //select a file rather than just index 0 in SortedWords
-                fw.SaveFile(fullDirectoryPath, fileName, SortedWords[0]);
+                // Iterate over the files loaded and save content
+                foreach (ReadFile file in readFiles)
+                {
+                    saveFileDialog.Filter = "Text Files|*.txt";
+                    //select file rather than index 0 in readFiles
+                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName) + "_sorted";
+                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string fullPath = saveFileDialog.FileName;
+                        string fileName = Path.GetFileNameWithoutExtension(fullPath);
+                        string fullDirectoryPath = Path.GetDirectoryName(fullPath);
+                        //select a file rather than just index 0 in SortedWords
+                        fw.SaveFile(fullDirectoryPath, fileName, file.Words);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No files have been loaded");
             }
         }
     }
