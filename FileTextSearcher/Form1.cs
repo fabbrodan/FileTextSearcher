@@ -95,37 +95,19 @@ namespace FileTextSearcher
         private void saveFileButton_Click(object sender, EventArgs e)
         {
             FileWriter fw = new FileWriter();
-            List<string> tempList = CreateNewList();
 
-            saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog.Filter = "Text Files|*.txt";
+            //select file rather than index 0 in readFiles
+            saveFileDialog.FileName = Path.GetFileNameWithoutExtension(readFiles[0].FileName)+"_sorted";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fullPath = saveFileDialog.FileName;
                 string fileName = Path.GetFileNameWithoutExtension(fullPath);
                 string fullDirectoryPath = Path.GetDirectoryName(fullPath);
-                fw.SaveFile(fullDirectoryPath, fileName, tempList);
+                //select a file rather than just index 0 in SortedWords
+                fw.SaveFile(fullDirectoryPath, fileName, SortedWords[0]);
             }
-        }
-
-        public List<string> CreateNewList()
-        {
-            List<string> listToReturn = new List<string>();
-            Random rnd = new Random();
-            int numberOfWords = rnd.Next(1, 1000);
-            Random rndWord = new Random();
-            while (numberOfWords > 0)
-            {
-                int lengthOfTempWord = 20;
-                string tempStringToAddToList = "";
-                for (var i = 0; i < lengthOfTempWord; i++)
-                {
-                    tempStringToAddToList += ((char)(rndWord.Next(1, 26) + 64)).ToString();
-                }
-                listToReturn.Add(tempStringToAddToList);
-                numberOfWords--;
-            }
-            return listToReturn;
         }
     }
 }
