@@ -92,5 +92,22 @@ namespace FileTextSearcher
                 }
             }
         }
+        private void saveFileButton_Click(object sender, EventArgs e)
+        {
+            FileWriter fw = new FileWriter();
+
+            saveFileDialog.Filter = "Text Files|*.txt";
+            //select file rather than index 0 in readFiles
+            saveFileDialog.FileName = Path.GetFileNameWithoutExtension(readFiles[0].FileName)+"_sorted";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fullPath = saveFileDialog.FileName;
+                string fileName = Path.GetFileNameWithoutExtension(fullPath);
+                string fullDirectoryPath = Path.GetDirectoryName(fullPath);
+                //select a file rather than just index 0 in SortedWords
+                fw.SaveFile(fullDirectoryPath, fileName, SortedWords[0]);
+            }
+        }
     }
 }

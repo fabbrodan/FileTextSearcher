@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.btnAddFiles = new System.Windows.Forms.Button();
+            this.saveFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -45,10 +47,19 @@
             this.btnAddFiles.UseVisualStyleBackColor = true;
             this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
             // 
+            // saveFileButton
+            // 
+            this.saveFileButton.Location = new System.Drawing.Point(713, 415);
+            this.saveFileButton.Name = "saveFileButton";
+            this.saveFileButton.Size = new System.Drawing.Size(75, 23);
+            this.saveFileButton.TabIndex = 0;
+            this.saveFileButton.Text = "Save File";
+            this.saveFileButton.UseVisualStyleBackColor = true;
+            this.saveFileButton.Click += new System.EventHandler(this.saveFileButton_Click);
+            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            this.openFileDialog.Multiselect = true;
             // 
             // dataGridView1
             // 
@@ -79,6 +90,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAddFiles);
+            this.Controls.Add(this.saveFileButton);
             this.Name = "Form1";
             this.Text = "File Text Searcher";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -90,7 +102,9 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddFiles;
+        private System.Windows.Forms.Button saveFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
     }
