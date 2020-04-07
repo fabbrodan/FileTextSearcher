@@ -15,7 +15,7 @@ namespace FileTextSearcher
 
         public ReadFile(string fileName, string fileContent)
         {
-            fileContent = fileContent.ToLower();
+            
             fileContent = Regex.Replace(fileContent, "[^a-zA-Z0-9._]", " ");
             Words = fileContent.Split(new[] { "\r\n", "\r", "\n", ".", "?", "!", " ", ";", ":", ",", "(", ")" },StringSplitOptions.RemoveEmptyEntries);
             NumberOfWords = Words.Count();
