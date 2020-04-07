@@ -34,6 +34,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClearData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,11 +84,22 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Sorted File Content:";
             // 
+            // btnClearData
+            // 
+            this.btnClearData.Location = new System.Drawing.Point(312, 415);
+            this.btnClearData.Name = "btnClearData";
+            this.btnClearData.Size = new System.Drawing.Size(75, 23);
+            this.btnClearData.TabIndex = 3;
+            this.btnClearData.Text = "Clear data";
+            this.btnClearData.UseVisualStyleBackColor = true;
+            this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnClearData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAddFiles);
@@ -108,6 +120,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnClearData;
     }
 }
 
