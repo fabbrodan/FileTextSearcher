@@ -122,5 +122,27 @@ namespace FileTextSearcher
                 MessageBox.Show("No files have been loaded");
             }
         }
+        /// <summary>
+        /// This button calls on cleardata to clear all previous data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClearData_Click(object sender, EventArgs e)
+        {
+            ClearData();
+        }
+        /// <summary>
+        /// This method clears all data from previous loaded textfiles. Also clears the datagridviews displayed data.
+        /// </summary>
+        private void ClearData()
+        {
+            readFiles.Clear();
+            SortedWords.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+        }
+
+        
     }
 }
