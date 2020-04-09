@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -121,6 +122,28 @@ namespace FileTextSearcher
             {
                 MessageBox.Show("No files have been loaded");
             }
+        }
+
+        //Variable for searched word
+        string word;
+        //Textbox for entering a word
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            btn_Search.Enabled = true;
+            word = textBox1.Text;
+        }
+
+        //Searches the files for the given word when button is clicked
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            SearchClass search = new SearchClass();
+
+            foreach(IList<string> file in SortedWords)
+            {
+                var wordCount = search.MatchOnSearchedWord(file, word);
+                resultSearch.Text = "The searched word " + word + " was found " + wordCount + " times";
+            }
+            
         }
     }
 }
