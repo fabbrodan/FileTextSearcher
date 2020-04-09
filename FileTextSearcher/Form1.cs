@@ -19,6 +19,7 @@ namespace FileTextSearcher
         public Form1()
         {
             InitializeComponent();
+            SelectFilesToSaveButton.Enabled = false;
         }
 
 
@@ -40,6 +41,7 @@ namespace FileTextSearcher
                         sorter.QuickSortAscending();
                         SortedWords.Add(sorter.Get());
                         readFiles.Add(readFile);
+                        SelectFilesToSaveButton.Enabled = true;
                     }
                     catch (IOException ex)
                     {
@@ -144,7 +146,7 @@ namespace FileTextSearcher
             dataGridView1.Refresh();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SelectFilesToSaveButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < SortedWords.Count; i++)
             {

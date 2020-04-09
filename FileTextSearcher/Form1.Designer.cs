@@ -35,7 +35,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClearData = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SelectFilesToSaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,22 +95,22 @@
             this.btnClearData.UseVisualStyleBackColor = true;
             this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
             // 
-            // button1
+            // SelectFilesToSaveButton
             // 
-            this.button1.Location = new System.Drawing.Point(632, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Open form";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SelectFilesToSaveButton.Location = new System.Drawing.Point(557, 415);
+            this.SelectFilesToSaveButton.Name = "SelectFilesToSaveButton";
+            this.SelectFilesToSaveButton.Size = new System.Drawing.Size(150, 23);
+            this.SelectFilesToSaveButton.TabIndex = 4;
+            this.SelectFilesToSaveButton.Text = "Select file(s) to save";
+            this.SelectFilesToSaveButton.UseVisualStyleBackColor = true;
+            this.SelectFilesToSaveButton.Click += new System.EventHandler(this.SelectFilesToSaveButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SelectFilesToSaveButton);
             this.Controls.Add(this.btnClearData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -133,7 +133,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClearData;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SelectFilesToSaveButton;
     }
 }
 

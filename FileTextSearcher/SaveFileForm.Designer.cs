@@ -28,44 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.saveFilesButton = new System.Windows.Forms.Button();
+            this.dataGridViewForFiles = new System.Windows.Forms.DataGridView();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(713, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Save file(s)";
-            this.button1.UseVisualStyleBackColor = true;
+            this.saveFilesButton.Location = new System.Drawing.Point(713, 415);
+            this.saveFilesButton.Name = "button1";
+            this.saveFilesButton.Size = new System.Drawing.Size(75, 23);
+            this.saveFilesButton.TabIndex = 1;
+            this.saveFilesButton.Text = "Save file(s)";
+            this.saveFilesButton.UseVisualStyleBackColor = true;
+            this.saveFilesButton.Click += new System.EventHandler(this.SaveSelectedFilesButton_Click);
             // 
-            // dataGridView1
+            // dataGridViewForFiles
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 397);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridViewForFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewForFiles.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewForFiles.Name = "dataGridViewForFiles";
+            this.dataGridViewForFiles.Size = new System.Drawing.Size(776, 397);
+            this.dataGridViewForFiles.TabIndex = 2;
+            this.dataGridViewForFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellContentClick);
+            this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellValueChanged);
             // 
             // SaveFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dataGridViewForFiles);
+            this.Controls.Add(this.saveFilesButton);
             this.Name = "SaveFileForm";
             this.Text = "SaveFileForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button saveFilesButton;
+        private System.Windows.Forms.DataGridView dataGridViewForFiles;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
