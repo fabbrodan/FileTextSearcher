@@ -15,6 +15,7 @@ namespace FileTextSearcher
     {
         private static List<ReadFile> readFiles = new List<ReadFile>();
         private static List<IList<string>> SortedWords = new List<IList<string>>();
+        private static List<SaveFile> listOfFilesToSave = new List<SaveFile>();
         public Form1()
         {
             InitializeComponent();
@@ -75,7 +76,7 @@ namespace FileTextSearcher
                 dataGridView1.Rows.Add(new DataGridViewRow());
             }
 
-            for (int i = 0; i <= SortedWords.Count -1; i++)
+            for (int i = 0; i <= SortedWords.Count - 1; i++)
             {
                 for (int j = 0; j < maxNumberOfWords; j++)
                 {
@@ -143,6 +144,14 @@ namespace FileTextSearcher
             dataGridView1.Refresh();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < SortedWords.Count; i++)
+            {
+                listOfFilesToSave.Add(new SaveFile(Path.GetDirectoryName(readFiles[i].FileName), Path.GetFileNameWithoutExtension(readFiles[i].FileName), SortedWords[i]));
+            }
+            SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
+            saveFileForm.Show();
+        }
     }
 }
