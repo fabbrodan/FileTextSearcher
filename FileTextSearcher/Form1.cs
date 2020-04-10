@@ -123,6 +123,5 @@ namespace FileTextSearcher
                 MessageBox.Show("No files have been loaded");
             }
         }
-
     }
 }
