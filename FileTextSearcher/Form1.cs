@@ -148,6 +148,8 @@ namespace FileTextSearcher
 
         private void SelectFilesToSaveButton_Click(object sender, EventArgs e)
         {
+            //Empty list before creating new form
+            listOfFilesToSave.Clear();
             for (int i = 0; i < SortedWords.Count; i++)
             {
                 listOfFilesToSave.Add(new SaveFile(Path.GetDirectoryName(readFiles[i].FileName), Path.GetFileNameWithoutExtension(readFiles[i].FileName), SortedWords[i]));

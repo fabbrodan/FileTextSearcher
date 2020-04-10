@@ -31,13 +31,14 @@
             this.saveFilesButton = new System.Windows.Forms.Button();
             this.dataGridViewForFiles = new System.Windows.Forms.DataGridView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // saveFilesButton
             // 
             this.saveFilesButton.Location = new System.Drawing.Point(713, 415);
-            this.saveFilesButton.Name = "button1";
+            this.saveFilesButton.Name = "saveFilesButton";
             this.saveFilesButton.Size = new System.Drawing.Size(75, 23);
             this.saveFilesButton.TabIndex = 1;
             this.saveFilesButton.Text = "Save file(s)";
@@ -47,24 +48,35 @@
             // dataGridViewForFiles
             // 
             this.dataGridViewForFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewForFiles.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewForFiles.Location = new System.Drawing.Point(12, 25);
             this.dataGridViewForFiles.Name = "dataGridViewForFiles";
-            this.dataGridViewForFiles.Size = new System.Drawing.Size(776, 397);
+            this.dataGridViewForFiles.Size = new System.Drawing.Size(776, 384);
             this.dataGridViewForFiles.TabIndex = 2;
             this.dataGridViewForFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellContentClick);
             this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Click the checkbox for each file you want to save, double click on name of file to edit name or path to selct a new path ";
             // 
             // SaveFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewForFiles);
             this.Controls.Add(this.saveFilesButton);
             this.Name = "SaveFileForm";
-            this.Text = "SaveFileForm";
+            this.Text = "Select files to save";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,5 +84,6 @@
         private System.Windows.Forms.Button saveFilesButton;
         private System.Windows.Forms.DataGridView dataGridViewForFiles;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label label1;
     }
 }

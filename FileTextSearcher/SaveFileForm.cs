@@ -44,6 +44,10 @@ namespace FileTextSearcher
             dataGridViewForFiles.Columns.Add(pathColumn);
             //disables row height resize by setting it to a default value
             dataGridViewForFiles.RowTemplate.Height = 20;
+
+            //prevents user from adding rows by themselves
+            dataGridViewForFiles.AllowUserToAddRows = false;
+            dataGridViewForFiles.AllowUserToDeleteRows = false;
             DisplayFilesToSave();
         }
 
@@ -57,8 +61,6 @@ namespace FileTextSearcher
                     dataGridViewForFiles.Rows.Add(false, file.name, file.path);
                 }
             }
-            //prevents user from adding rows by themselves
-            dataGridViewForFiles.AllowUserToAddRows = false;
         }
 
         private void RefreshFilePathColumn()
@@ -94,22 +96,51 @@ namespace FileTextSearcher
         {
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
-                listOfFilesToSave[e.RowIndex].name = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                RefreshFileNameColumn();
+                if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value!=null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
+                {
+                    listOfFilesToSave[e.RowIndex].name = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    RefreshFileNameColumn();
+                }
+                else {
+                    MessageBox.Show("File name must be at least one character long");
+                }
             }
         }
 
         private void SaveSelectedFilesButton_Click(object sender, EventArgs e)
         {
             FileWriter fw = new FileWriter();
-            for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
+            if (GetNumberOfSelectedFiles() > 0)
             {
-                if ((bool)dataGridViewForFiles.Rows[i].Cells[0].Value == true)
+                for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
                 {
-                    fw.SaveFile(dataGridViewForFiles.Rows[i].Cells[2].Value.ToString(), dataGridViewForFiles.Rows[i].Cells[1].Value.ToString(), listOfFilesToSave[i].listOfWords);
+                    if ((bool)dataGridViewForFiles.Rows[i].Cells[0].Value == true)
+                    {
+                        fw.SaveFile(dataGridViewForFiles.Rows[i].Cells[2].Value.ToString(), dataGridViewForFiles.Rows[i].Cells[1].Value.ToString(), listOfFilesToSave[i].listOfWords);
+                    }
+                }
+                MessageBox.Show("Saved " + GetNumberOfSelectedFiles() + " files");
+                Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Select at least one file to save");
+            }
+        }
+
+        private int GetNumberOfSelectedFiles()
+        {
+            int numberOfSelected = 0;
+
+            foreach (DataGridViewRow row in dataGridViewForFiles.Rows)
+            {
+                if ((bool)row.Cells[0].Value == true)
+                {
+                    numberOfSelected++;
                 }
             }
-            Close();
+            return numberOfSelected;
         }
+
     }
 }
