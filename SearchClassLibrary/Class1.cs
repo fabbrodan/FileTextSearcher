@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SearchClassLibrary
@@ -16,10 +17,18 @@ namespace SearchClassLibrary
         /// </summary>
         /// <param name="file">Text from text document</param>
         /// <returns>String array containing extracted words from <paramref name="file"/></returns>
-        public string[] ConvertString(string file)
+        public List<string> ConvertString(List<IList<string>> file)
         {
-            string[] text = file.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-            return text;
+            //List<string> text = file.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+            //List<string> text = file.ToList<string>;
+            //return text;
+            List<string> result = new List<string>();
+            foreach (var value in file)
+            {
+                //result.Add(value);
+            }
+            //List<string> result = file.ToList<string>;
+            return result;
         }
 
         
@@ -29,7 +38,7 @@ namespace SearchClassLibrary
         /// <param name="text">String array of extracted words</param>
         /// <param name="searchedWord">Searched word</param>
         /// <returns>Count of matched <paramref name="searchedWord"/> in <paramref name="text"/></returns>
-        public int MatchOnSearchedWord(string[] text, string searchedWord)
+        public int MatchOnSearchedWord(IList<string> text, string searchedWord)
         {
             var match = from word in text
                         where (word.ToLowerInvariant() == searchedWord.ToLowerInvariant()) && (word.ToUpperInvariant() == searchedWord.ToUpperInvariant())
