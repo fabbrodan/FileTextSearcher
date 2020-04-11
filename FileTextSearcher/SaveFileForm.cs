@@ -12,13 +12,13 @@ namespace FileTextSearcher
 {
     public partial class SaveFileForm : Form
     {
-        private static List<SaveFile> listOfFilesToSave = new List<SaveFile>();
+        private static List<FileToSave> listOfFilesToSave = new List<FileToSave>();
         public SaveFileForm()
         {
             InitializeComponent();
         }
 
-        public SaveFileForm(List<SaveFile> listOfFiles)
+        public SaveFileForm(List<FileToSave> listOfFiles)
         {
             InitializeComponent();
             listOfFilesToSave = listOfFiles;
@@ -45,12 +45,15 @@ namespace FileTextSearcher
             //disables row height resize by setting it to a default value
             dataGridViewForFiles.RowTemplate.Height = 20;
 
-            //prevents user from adding rows by themselves
+            //prevents user from adding and deleting rows by themselves
             dataGridViewForFiles.AllowUserToAddRows = false;
             dataGridViewForFiles.AllowUserToDeleteRows = false;
             DisplayFilesToSave();
         }
 
+        /// <summary>
+        /// Displays all available files in the data grid
+        /// </summary>
         private void DisplayFilesToSave()
         {
             //Adds rows from all available files
@@ -63,6 +66,9 @@ namespace FileTextSearcher
             }
         }
 
+        /// <summary>
+        /// Refreshes the File Path column
+        /// </summary>
         private void RefreshFilePathColumn()
         {
             for (int i = 0; i < listOfFilesToSave.Count; i++)
@@ -70,6 +76,9 @@ namespace FileTextSearcher
                 dataGridViewForFiles[2, i].Value = listOfFilesToSave[i].path;
             }
         }
+        /// <summary>
+        /// Refreshes the file name column
+        /// </summary>
         private void RefreshFileNameColumn()
         {
             for (int i = 0; i < listOfFilesToSave.Count; i++)
@@ -78,6 +87,12 @@ namespace FileTextSearcher
             }
         }
 
+        
+        /// <summary>
+        /// Allows the user to change save path when double clicking on a value in the file path column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //only file path column and not in header row
@@ -91,9 +106,14 @@ namespace FileTextSearcher
                 }
             }
         }
-
+        /// <summary>
+        /// Allows the user to change the file name when double clicking on a vlue in the file name column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewForFiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            //only file name column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
                 if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value!=null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
@@ -107,6 +127,11 @@ namespace FileTextSearcher
             }
         }
 
+        /// <summary>
+        /// Saves every selected file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveSelectedFilesButton_Click(object sender, EventArgs e)
         {
             FileWriter fw = new FileWriter();
@@ -127,7 +152,10 @@ namespace FileTextSearcher
                 MessageBox.Show("Select at least one file to save");
             }
         }
-
+        /// <summary>
+        /// calculates the number of seleted files
+        /// </summary>
+        /// <returns></returns>
         private int GetNumberOfSelectedFiles()
         {
             int numberOfSelected = 0;

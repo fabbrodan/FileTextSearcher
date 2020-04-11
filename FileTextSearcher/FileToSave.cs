@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace FileTextSearcher
 {
-    public class SaveFile
+    public class FileToSave
     {
         public string path;
         public string name;
         public IList<string> listOfWords;
 
-        public SaveFile(string pathOfFile, string nameOfFile, IList<string> listOfWordsInFile)
+        public FileToSave(string pathOfFile, string nameOfFile, IList<string> listOfWordsInFile)
         {
             path = pathOfFile;
             name = nameOfFile;

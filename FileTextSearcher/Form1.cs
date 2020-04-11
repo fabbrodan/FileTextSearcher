@@ -15,7 +15,7 @@ namespace FileTextSearcher
     {
         private static List<ReadFile> readFiles = new List<ReadFile>();
         private static List<IList<string>> SortedWords = new List<IList<string>>();
-        private static List<SaveFile> listOfFilesToSave = new List<SaveFile>();
+        private static List<FileToSave> listOfFilesToSave = new List<FileToSave>();
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace FileTextSearcher
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
             openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -58,6 +59,9 @@ namespace FileTextSearcher
         /// </summary>
         private void DisplaySortResult()
         {
+            //clears the data grid view every time DisplaySortResult() is called to prevent
+            //it from adding every column again in addition to the already existing ones (duplicate columns) 
+            dataGridView1.Columns.Clear();
             int maxNumberOfWords = 0;
             foreach (var file in readFiles)
             {
@@ -107,7 +111,7 @@ namespace FileTextSearcher
                 {
                     saveFileDialog.Filter = "Text Files|*.txt";
                     //select file rather than index 0 in readFiles
-                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName) + "_sorted";
+                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName);
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -146,13 +150,19 @@ namespace FileTextSearcher
             dataGridView1.Refresh();
         }
 
+        /// <summary>
+        /// Clears the list of files to save (to prevent duplicates) and creates
+        /// and adds every file to the list again and sends it to the save file form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectFilesToSaveButton_Click(object sender, EventArgs e)
         {
             //Empty list before creating new form
             listOfFilesToSave.Clear();
             for (int i = 0; i < SortedWords.Count; i++)
             {
-                listOfFilesToSave.Add(new SaveFile(Path.GetDirectoryName(readFiles[i].FileName), Path.GetFileNameWithoutExtension(readFiles[i].FileName), SortedWords[i]));
+                listOfFilesToSave.Add(new FileToSave(Path.GetDirectoryName(readFiles[i].FileName), Path.GetFileNameWithoutExtension(readFiles[i].FileName), SortedWords[i]));
             }
             SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
             saveFileForm.Show();
