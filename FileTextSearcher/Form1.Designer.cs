@@ -35,7 +35,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClearData = new System.Windows.Forms.Button();
-            this.SelectFilesToSaveButton = new System.Windows.Forms.Button();
+            this.btnSelectFilesToSave = new System.Windows.Forms.Button();
             this.searchLabel = new System.Windows.Forms.Label();
             this.searchInputField = new System.Windows.Forms.TextBox();
             this.btn_Search = new System.Windows.Forms.Button();
@@ -103,14 +103,14 @@
             // 
             // SelectFilesToSaveButton
             // 
-            this.SelectFilesToSaveButton.Enabled = false;
-            this.SelectFilesToSaveButton.Location = new System.Drawing.Point(638, 415);
-            this.SelectFilesToSaveButton.Name = "SelectFilesToSaveButton";
-            this.SelectFilesToSaveButton.Size = new System.Drawing.Size(150, 23);
-            this.SelectFilesToSaveButton.TabIndex = 4;
-            this.SelectFilesToSaveButton.Text = "Select file(s) to save";
-            this.SelectFilesToSaveButton.UseVisualStyleBackColor = true;
-            this.SelectFilesToSaveButton.Click += new System.EventHandler(this.SelectFilesToSaveButton_Click);
+            this.btnSelectFilesToSave.Enabled = false;
+            this.btnSelectFilesToSave.Location = new System.Drawing.Point(638, 415);
+            this.btnSelectFilesToSave.Name = "btnSelectFileToSave";
+            this.btnSelectFilesToSave.Size = new System.Drawing.Size(150, 23);
+            this.btnSelectFilesToSave.TabIndex = 4;
+            this.btnSelectFilesToSave.Text = "Select file(s) to save";
+            this.btnSelectFilesToSave.UseVisualStyleBackColor = true;
+            this.btnSelectFilesToSave.Click += new System.EventHandler(this.btnSelectFilesToSave_Click);
             // 
             // searchLabel
             // 
@@ -170,7 +170,7 @@
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.searchInputField);
             this.Controls.Add(this.searchLabel);
-            this.Controls.Add(this.SelectFilesToSaveButton);
+            this.Controls.Add(this.btnSelectFilesToSave);
             this.Controls.Add(this.btnClearData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -193,7 +193,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClearData;
-        private System.Windows.Forms.Button SelectFilesToSaveButton;
+        private System.Windows.Forms.Button btnSelectFilesToSave;
         private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.TextBox searchInputField;
         private System.Windows.Forms.Button btn_Search;

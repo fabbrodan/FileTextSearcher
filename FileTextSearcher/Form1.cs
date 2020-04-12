@@ -20,7 +20,7 @@ namespace FileTextSearcher
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
 
@@ -43,7 +43,7 @@ namespace FileTextSearcher
                         sorter.QuickSortAscending();
                         SortedWords.Add(sorter.Get());
                         readFiles.Add(readFile);
-                        SelectFilesToSaveButton.Enabled = true;
+                        btnSelectFilesToSave.Enabled = true;
                     }
                     catch (IOException ex)
                     {
@@ -153,6 +153,9 @@ namespace FileTextSearcher
             dataGridView1.Refresh();
             btnClearData.Enabled = false;
             searchInputField.Enabled = false;
+            searchInputField.Text = string.Empty;
+            resultSearch.Text = string.Empty;
+            btnSelectFilesToSave.Enabled = false;
         }
 
         /// <summary>
@@ -161,7 +164,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectFilesToSaveButton_Click(object sender, EventArgs e)
+        private void btnSelectFilesToSave_Click(object sender, EventArgs e)
         {
             //Empty list before creating new form
             listOfFilesToSave.Clear();
