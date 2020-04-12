@@ -36,6 +36,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClearData = new System.Windows.Forms.Button();
             this.SelectFilesToSaveButton = new System.Windows.Forms.Button();
+            this.searchLabel = new System.Windows.Forms.Label();
+            this.searchInputField = new System.Windows.Forms.TextBox();
+            this.btn_Search = new System.Windows.Forms.Button();
+            this.resultLabel = new System.Windows.Forms.Label();
+            this.resultSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,11 +110,62 @@
             this.SelectFilesToSaveButton.UseVisualStyleBackColor = true;
             this.SelectFilesToSaveButton.Click += new System.EventHandler(this.SelectFilesToSaveButton_Click);
             // 
+            // label2
+            // 
+            this.searchLabel.AutoSize = true;
+            this.searchLabel.Location = new System.Drawing.Point(429, 9);
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(72, 13);
+            this.searchLabel.TabIndex = 5;
+            this.searchLabel.Text = "Search In File";
+            // 
+            // searchInputField
+            // 
+            this.searchInputField.Location = new System.Drawing.Point(432, 33);
+            this.searchInputField.Name = "searchInputField";
+            this.searchInputField.Size = new System.Drawing.Size(172, 20);
+            this.searchInputField.TabIndex = 6;
+            this.searchInputField.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(610, 31);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 23);
+            this.btn_Search.TabIndex = 7;
+            this.btn_Search.Text = "Search";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // label3
+            // 
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Location = new System.Drawing.Point(432, 73);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(35, 13);
+            this.resultLabel.TabIndex = 8;
+            this.resultLabel.Text = "Result:";
+            // 
+            // resultSearch
+            // 
+            this.resultSearch.Location = new System.Drawing.Point(435, 105);
+            this.resultSearch.Multiline = true;
+            this.resultSearch.Name = "resultSearch";
+            this.resultSearch.Size = new System.Drawing.Size(353, 226);
+            this.resultSearch.ReadOnly = true;
+            this.resultSearch.TabStop = false;
+            this.resultSearch.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.resultSearch);
+            this.Controls.Add(this.resultLabel);
+            this.Controls.Add(this.btn_Search);
+            this.Controls.Add(this.searchInputField);
+            this.Controls.Add(this.searchLabel);
             this.Controls.Add(this.SelectFilesToSaveButton);
             this.Controls.Add(this.btnClearData);
             this.Controls.Add(this.label1);
@@ -134,6 +190,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClearData;
         private System.Windows.Forms.Button SelectFilesToSaveButton;
+        private System.Windows.Forms.Label searchLabel;
+        private System.Windows.Forms.TextBox searchInputField;
+        private System.Windows.Forms.Button btn_Search;
+        private System.Windows.Forms.Label resultLabel;
+        private System.Windows.Forms.TextBox resultSearch;
     }
 }
 

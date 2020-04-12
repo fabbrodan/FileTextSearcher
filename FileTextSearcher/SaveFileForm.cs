@@ -87,7 +87,7 @@ namespace FileTextSearcher
             }
         }
 
-        
+
         /// <summary>
         /// Allows the user to change save path when double clicking on a value in the file path column
         /// </summary>
@@ -116,12 +116,13 @@ namespace FileTextSearcher
             //only file name column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
-                if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value!=null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
+                if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
                 {
                     listOfFilesToSave[e.RowIndex].name = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     RefreshFileNameColumn();
                 }
-                else {
+                else
+                {
                     MessageBox.Show("File name must be at least one character long");
                 }
             }

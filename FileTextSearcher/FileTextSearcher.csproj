@@ -57,7 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadFile.cs" />
-    <Compile Include="SaveFile.cs" />
+    <Compile Include="FileToSave.cs" />
     <Compile Include="SaveFileForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SearchClassLibrary\SearchClassLibrary.csproj">
+      <Project>{1383D0DB-2D00-4A08-BEB3-9FD6456BDC32}</Project>
+      <Name>SearchClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

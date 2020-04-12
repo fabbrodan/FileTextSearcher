@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,8 @@ namespace FileTextSearcher
         {
             InitializeComponent();
             SelectFilesToSaveButton.Enabled = false;
+            btn_Search.Enabled = false;
+            searchInputField.Enabled = false;
         }
 
 
@@ -50,6 +53,7 @@ namespace FileTextSearcher
                     }
                     counter++;
                 }
+                searchInputField.Enabled = true;
                 DisplaySortResult();
             }
         }
@@ -167,5 +171,52 @@ namespace FileTextSearcher
             SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
             saveFileForm.Show();
         }
+        //Variable for searched word
+        private string word;
+        //Textbox for entering a word
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            btn_Search.Enabled = true;
+            word = searchInputField.Text;
+        }
+
+        //Searches the files for the given word when button is clicked
+        //Displays filename and result in a textbox
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            //When the search button is clicked, textbox will be cleared and new serach result displayed
+            resultSearch.Text = string.Empty;
+
+            SearchClass search = new SearchClass();
+
+            if (word.Length > 0)
+            {
+                //Loop file/files to get filename and count of matches for the searched word
+                for (int i = 0; i < SortedWords.Count; i++)
+                {
+                    var wordCount = search.MatchOnSearchedWord(SortedWords[i], word);
+                    var fileName = Path.GetFileNameWithoutExtension(readFiles[i].FileName);
+
+                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
+                }
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(searchInputField.Text))
+                {
+                    MessageBox.Show("Please enter a valid input");
+                    resultSearch.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid input");
+                    resultSearch.Text = string.Empty;
+                }
+            }
+            //Cleares search textbox after each search
+            searchInputField.Text = string.Empty;
+            btn_Search.Enabled = false;
+        }
+
     }
 }
