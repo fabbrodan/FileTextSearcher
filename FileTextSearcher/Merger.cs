@@ -19,6 +19,7 @@ namespace FileTextSearcher
         public Merger(ReadFile[] Files)
         {
             this.Files = Files;
+            MergedData = new List<string>();
         }
 
         /// <summary>
