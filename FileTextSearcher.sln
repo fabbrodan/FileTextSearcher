@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTextSearcher", "FileTex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchClassLibrary", "SearchClassLibrary\SearchClassLibrary.csproj", "{1383D0DB-2D00-4A08-BEB3-9FD6456BDC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeTestVault", "MergeTestVault\MergeTestVault.csproj", "{90EE65F3-8135-497A-8E2E-908C10C51745}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
