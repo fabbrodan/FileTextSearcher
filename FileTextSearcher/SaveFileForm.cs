@@ -43,11 +43,7 @@ namespace FileTextSearcher
             pathColumn.Width = 400;
             dataGridViewForFiles.Columns.Add(pathColumn);
             //disables row height resize by setting it to a default value
-            dataGridViewForFiles.RowTemplate.Height = 20;
-
-            //prevents user from adding and deleting rows by themselves
-            dataGridViewForFiles.AllowUserToAddRows = false;
-            dataGridViewForFiles.AllowUserToDeleteRows = false;
+            
             DisplayFilesToSave();
         }
 
@@ -145,7 +141,7 @@ namespace FileTextSearcher
                         fw.SaveFile(dataGridViewForFiles.Rows[i].Cells[2].Value.ToString(), dataGridViewForFiles.Rows[i].Cells[1].Value.ToString(), listOfFilesToSave[i].listOfWords);
                     }
                 }
-                MessageBox.Show("Saved " + GetNumberOfSelectedFiles() + " files");
+                MessageBox.Show("Saved " + GetNumberOfSelectedFiles() + " file(s)");
                 Dispose();
             }
             else

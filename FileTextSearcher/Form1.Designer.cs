@@ -56,7 +56,7 @@
             // 
             // saveFileButton
             // 
-            this.saveFileButton.Location = new System.Drawing.Point(713, 415);
+            this.saveFileButton.Location = new System.Drawing.Point(557, 415);
             this.saveFileButton.Name = "saveFileButton";
             this.saveFileButton.Size = new System.Drawing.Size(75, 23);
             this.saveFileButton.TabIndex = 0;
@@ -92,6 +92,7 @@
             // 
             // btnClearData
             // 
+            this.btnClearData.Enabled = false;
             this.btnClearData.Location = new System.Drawing.Point(312, 415);
             this.btnClearData.Name = "btnClearData";
             this.btnClearData.Size = new System.Drawing.Size(75, 23);
@@ -102,7 +103,8 @@
             // 
             // SelectFilesToSaveButton
             // 
-            this.SelectFilesToSaveButton.Location = new System.Drawing.Point(557, 415);
+            this.SelectFilesToSaveButton.Enabled = false;
+            this.SelectFilesToSaveButton.Location = new System.Drawing.Point(638, 415);
             this.SelectFilesToSaveButton.Name = "SelectFilesToSaveButton";
             this.SelectFilesToSaveButton.Size = new System.Drawing.Size(150, 23);
             this.SelectFilesToSaveButton.TabIndex = 4;
@@ -110,7 +112,7 @@
             this.SelectFilesToSaveButton.UseVisualStyleBackColor = true;
             this.SelectFilesToSaveButton.Click += new System.EventHandler(this.SelectFilesToSaveButton_Click);
             // 
-            // label2
+            // searchLabel
             // 
             this.searchLabel.AutoSize = true;
             this.searchLabel.Location = new System.Drawing.Point(429, 9);
@@ -121,6 +123,7 @@
             // 
             // searchInputField
             // 
+            this.searchInputField.Enabled = false;
             this.searchInputField.Location = new System.Drawing.Point(432, 33);
             this.searchInputField.Name = "searchInputField";
             this.searchInputField.Size = new System.Drawing.Size(172, 20);
@@ -129,6 +132,7 @@
             // 
             // btn_Search
             // 
+            this.btn_Search.Enabled = false;
             this.btn_Search.Location = new System.Drawing.Point(610, 31);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
@@ -137,12 +141,12 @@
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
-            // label3
+            // resultLabel
             // 
             this.resultLabel.AutoSize = true;
             this.resultLabel.Location = new System.Drawing.Point(432, 73);
             this.resultLabel.Name = "resultLabel";
-            this.resultLabel.Size = new System.Drawing.Size(35, 13);
+            this.resultLabel.Size = new System.Drawing.Size(40, 13);
             this.resultLabel.TabIndex = 8;
             this.resultLabel.Text = "Result:";
             // 
@@ -151,10 +155,10 @@
             this.resultSearch.Location = new System.Drawing.Point(435, 105);
             this.resultSearch.Multiline = true;
             this.resultSearch.Name = "resultSearch";
-            this.resultSearch.Size = new System.Drawing.Size(353, 226);
             this.resultSearch.ReadOnly = true;
-            this.resultSearch.TabStop = false;
+            this.resultSearch.Size = new System.Drawing.Size(353, 226);
             this.resultSearch.TabIndex = 9;
+            this.resultSearch.TabStop = false;
             // 
             // Form1
             // 

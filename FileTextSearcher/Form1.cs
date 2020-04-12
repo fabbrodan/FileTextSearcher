@@ -20,9 +20,7 @@ namespace FileTextSearcher
         public Form1()
         {
             InitializeComponent();
-            SelectFilesToSaveButton.Enabled = false;
-            btn_Search.Enabled = false;
-            searchInputField.Enabled = false;
+            
         }
 
 
@@ -54,6 +52,7 @@ namespace FileTextSearcher
                     counter++;
                 }
                 searchInputField.Enabled = true;
+                btnClearData.Enabled = true;
                 DisplaySortResult();
             }
         }
@@ -152,6 +151,8 @@ namespace FileTextSearcher
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
+            btnClearData.Enabled = false;
+            searchInputField.Enabled = false;
         }
 
         /// <summary>
