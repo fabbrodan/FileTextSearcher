@@ -25,6 +25,7 @@ namespace FileTextSearcher
             //Column for checkbox
             DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
             checkColumn.HeaderText = "Save";
+            checkColumn.Name = "saveCheckbox";
             checkColumn.Width = 50;
             dataGridViewForFiles.Columns.Add(checkColumn);
 
@@ -42,8 +43,7 @@ namespace FileTextSearcher
             pathColumn.ReadOnly = true;
             pathColumn.Width = 400;
             dataGridViewForFiles.Columns.Add(pathColumn);
-            //disables row height resize by setting it to a default value
-            
+
             DisplayFilesToSave();
         }
 
@@ -119,6 +119,7 @@ namespace FileTextSearcher
                 }
                 else
                 {
+                    dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = listOfFilesToSave[e.RowIndex].name;
                     MessageBox.Show("File name must be at least one character long");
                 }
             }
@@ -150,7 +151,7 @@ namespace FileTextSearcher
             }
         }
         /// <summary>
-        /// calculates the number of seleted files
+        /// calculates the number of selected files
         /// </summary>
         /// <returns></returns>
         private int GetNumberOfSelectedFiles()
@@ -166,6 +167,30 @@ namespace FileTextSearcher
             }
             return numberOfSelected;
         }
+        /// <summary>
+        /// Selects or unselects all files
+        /// </summary>
+        private bool selectedAll = false;
+        private void SelectAllFiles_click(object sender, EventArgs e)
+        {
+            if (!selectedAll)
+            {
+                for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
+                {
+                    ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[i].Cells[0]).Value = true;
+                }
+                selectedAll = true;
+                selectAllFilesBtn.Text = "Unselect all files";
+            }
+            else {
+                for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
+                {
+                    ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[i].Cells[0]).Value = false;
+                }
+                selectedAll = false;
+                selectAllFilesBtn.Text = "Select all files";
+            }
 
+        }
     }
 }
