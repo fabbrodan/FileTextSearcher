@@ -119,8 +119,17 @@ namespace FileTextSearcher
             {
                 if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
                 {
-                    listOfFilesToSave[e.RowIndex].name = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    RefreshFileNameColumn();
+                    string newCellValue = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    if (newCellValue.IndexOfAny("/\\?\":|*<>".ToCharArray()) == -1)
+                    {
+                        listOfFilesToSave[e.RowIndex].name = newCellValue;
+                        RefreshFileNameColumn();
+                    }
+                    else
+                    {
+                        dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = listOfFilesToSave[e.RowIndex].name;
+                        MessageBox.Show("File name cannot contain the following characters: /\\?\":|*<>");
+                    }
                 }
                 else
                 {

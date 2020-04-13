@@ -76,19 +76,15 @@ namespace FileTextSearcher
             }
             catch (ArgumentNullException e)
             {
-                throw e;
             }
             catch (ArgumentException e)
             {
-                throw e;
             }
             catch (DirectoryNotFoundException e)
             {
-                throw e;
             }
             catch (IOException e)
             {
-                throw e;
             }
 
         }
