@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +16,11 @@ namespace FileTextSearcher
     {
         private static List<ReadFile> readFiles = new List<ReadFile>();
         private static List<IList<string>> SortedWords = new List<IList<string>>();
+        private static List<FileToSave> listOfFilesToSave = new List<FileToSave>();
         public Form1()
         {
             InitializeComponent();
+
         }
 
 
@@ -25,6 +28,7 @@ namespace FileTextSearcher
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
             openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -39,6 +43,7 @@ namespace FileTextSearcher
                         sorter.QuickSortAscending();
                         SortedWords.Add(sorter.Get());
                         readFiles.Add(readFile);
+                        btnSelectFilesToSave.Enabled = true;
                     }
                     catch (IOException ex)
                     {
@@ -46,6 +51,8 @@ namespace FileTextSearcher
                     }
                     counter++;
                 }
+                searchInputField.Enabled = true;
+                btnClearData.Enabled = true;
                 DisplaySortResult();
             }
         }
@@ -55,6 +62,9 @@ namespace FileTextSearcher
         /// </summary>
         private void DisplaySortResult()
         {
+            //clears the data grid view every time DisplaySortResult() is called to prevent
+            //it from adding every column again in addition to the already existing ones (duplicate columns) 
+            dataGridView1.Columns.Clear();
             int maxNumberOfWords = 0;
             foreach (var file in readFiles)
             {
@@ -75,7 +85,7 @@ namespace FileTextSearcher
                 dataGridView1.Rows.Add(new DataGridViewRow());
             }
 
-            for (int i = 0; i <= SortedWords.Count -1; i++)
+            for (int i = 0; i <= SortedWords.Count - 1; i++)
             {
                 for (int j = 0; j < maxNumberOfWords; j++)
                 {
@@ -104,7 +114,7 @@ namespace FileTextSearcher
                 {
                     saveFileDialog.Filter = "Text Files|*.txt";
                     //select file rather than index 0 in readFiles
-                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName) + "_sorted";
+                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName);
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -122,6 +132,7 @@ namespace FileTextSearcher
                 MessageBox.Show("No files have been loaded");
             }
         }
+
         /// <summary>
         /// This button calls on cleardata to clear all previous data.
         /// </summary>
@@ -141,8 +152,75 @@ namespace FileTextSearcher
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
+            btnClearData.Enabled = false;
+            searchInputField.Enabled = false;
+            searchInputField.Text = string.Empty;
+            resultSearch.Text = string.Empty;
+            btnSelectFilesToSave.Enabled = false;
         }
 
-        
+        /// <summary>
+        /// Clears the list of files to save (to prevent duplicates) and creates
+        /// and adds every file to the list again and sends it to the save file form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSelectFilesToSave_Click(object sender, EventArgs e)
+        {
+            //Empty list before creating new form
+            listOfFilesToSave.Clear();
+            for (int i = 0; i < SortedWords.Count; i++)
+            {
+                listOfFilesToSave.Add(new FileToSave(Path.GetDirectoryName(readFiles[i].FileName), Path.GetFileNameWithoutExtension(readFiles[i].FileName), SortedWords[i]));
+            }
+            SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
+            saveFileForm.Show();
+        }
+        //Variable for searched word
+        private string word;
+        //Textbox for entering a word
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            btn_Search.Enabled = true;
+            word = searchInputField.Text;
+        }
+
+        //Searches the files for the given word when button is clicked
+        //Displays filename and result in a textbox
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            //When the search button is clicked, textbox will be cleared and new serach result displayed
+            resultSearch.Text = string.Empty;
+
+            SearchClass search = new SearchClass();
+
+            if (word.Length > 0)
+            {
+                //Loop file/files to get filename and count of matches for the searched word
+                for (int i = 0; i < SortedWords.Count; i++)
+                {
+                    var wordCount = search.MatchOnSearchedWord(SortedWords[i], word);
+                    var fileName = Path.GetFileNameWithoutExtension(readFiles[i].FileName);
+
+                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
+                }
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(searchInputField.Text))
+                {
+                    MessageBox.Show("Please enter a valid input");
+                    resultSearch.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid input");
+                    resultSearch.Text = string.Empty;
+                }
+            }
+            //Cleares search textbox after each search
+            searchInputField.Text = string.Empty;
+            btn_Search.Enabled = false;
+        }
     }
 }
