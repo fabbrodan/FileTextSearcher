@@ -29,6 +29,7 @@ namespace FileTextSearcher
         {
             openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.FileName = string.Empty;
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -102,7 +103,7 @@ namespace FileTextSearcher
                 }
             }
         }
-        
+
 
         /// <summary>
         /// This button calls on cleardata to clear all previous data.
@@ -163,10 +164,17 @@ namespace FileTextSearcher
         {
             //When the search button is clicked, textbox will be cleared and new serach result displayed
             resultSearch.Text = string.Empty;
+            string resultString = string.Empty;
 
             SearchClass search = new SearchClass();
 
-            if (word.Length > 0)
+            if (searchInputField.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please enter a valid input");
+                return;
+            }
+
+            else if (word.Length > 0)
             {
                 //Loop file/files to get filename and count of matches for the searched word
                 for (int i = 0; i < SortedWords.Count; i++)
@@ -174,24 +182,13 @@ namespace FileTextSearcher
                     var wordCount = search.MatchOnSearchedWord(SortedWords[i], word);
                     var fileName = Path.GetFileNameWithoutExtension(readFiles[i].FileName);
 
-                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
+                    resultString += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
                 }
             }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(searchInputField.Text))
-                {
-                    MessageBox.Show("Please enter a valid input");
-                    resultSearch.Text = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("Please enter a valid input");
-                    resultSearch.Text = string.Empty;
-                }
-            }
+            resultSearch.Text = resultString;
             //Cleares search textbox after each search
             searchInputField.Text = string.Empty;
+            word = string.Empty;
             btn_Search.Enabled = false;
         }
     }
