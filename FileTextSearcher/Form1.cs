@@ -147,10 +147,11 @@ namespace FileTextSearcher
             SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
             saveFileForm.Show();
         }
+
         //Variable for searched word
         private string word;
         //Textbox for entering a word
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void SearchInputField_TextChanged(object sender, EventArgs e)
         {
             btn_Search.Enabled = true;
             word = searchInputField.Text;

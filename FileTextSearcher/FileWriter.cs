@@ -35,59 +35,29 @@ namespace FileTextSearcher
         /// <param name="sortedListOfWords">Data strucutre to write to file</param>
         public void SaveFile(string filePath, string fileName, IList<string> sortedListOfWords)
         {
-            
-            try
+            int currentFileIteration = 0;
+            bool tryToCreateFile = true;
+
+            fileName = fileName + "_sorted";
+            string tryFileName = fileName;
+            while (tryToCreateFile)
             {
-                int currentFileIteration = 0;
-                bool tryToCreateFile = true;
-                if (filePath != null && fileName!=null && sortedListOfWords != null )
+                string newFilePath = Path.Combine(filePath, tryFileName + ".txt");
+                if (!File.Exists(newFilePath))
                 {
-                    if (fileName != "")
+                    using (StreamWriter sw = new StreamWriter(newFilePath))
                     {
-                        fileName = fileName + "_sorted";
-                        string tryFileName = fileName;
-                        while (tryToCreateFile)
-                        {
-                            string newFilePath = Path.Combine(filePath, tryFileName + ".txt");
-                            if (!File.Exists(newFilePath))
-                            {
-                                using (StreamWriter sw = new StreamWriter(newFilePath))
-                                {
-                                    WriteToFile(sw, sortedListOfWords);
-                                }
-                                tryToCreateFile = false;
-                            }
-                            else {
-                                tryFileName = fileName;
-                                currentFileIteration++;
-                                tryFileName = fileName + " (" + currentFileIteration + ")";
-                            }
-                        }
+                        WriteToFile(sw, sortedListOfWords);
                     }
-                    else
-                    {
-                        throw new ArgumentException();
-                    }
+                    tryToCreateFile = false;
                 }
                 else
                 {
-                    throw new ArgumentNullException();
+                    tryFileName = fileName;
+                    currentFileIteration++;
+                    tryFileName = fileName + " (" + currentFileIteration + ")";
                 }
             }
-            catch (ArgumentNullException e)
-            {
-            }
-            catch (ArgumentException e)
-            {
-            }
-            catch (DirectoryNotFoundException e)
-            {
-            }
-            catch (IOException e)
-            {
-            }
-
         }
-
     }
 }

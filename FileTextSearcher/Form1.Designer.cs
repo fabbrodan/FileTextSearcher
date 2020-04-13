@@ -118,7 +118,7 @@
             this.searchInputField.Name = "searchInputField";
             this.searchInputField.Size = new System.Drawing.Size(172, 20);
             this.searchInputField.TabIndex = 6;
-            this.searchInputField.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.searchInputField.TextChanged += new System.EventHandler(this.SearchInputField_TextChanged);
             // 
             // btn_Search
             // 
