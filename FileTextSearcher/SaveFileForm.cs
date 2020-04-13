@@ -89,7 +89,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //only file path column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 2)

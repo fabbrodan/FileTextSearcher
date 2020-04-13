@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnAddFiles = new System.Windows.Forms.Button();
-            this.saveFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -53,16 +52,6 @@
             this.btnAddFiles.Text = "Add file(s)";
             this.btnAddFiles.UseVisualStyleBackColor = true;
             this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
-            // 
-            // saveFileButton
-            // 
-            this.saveFileButton.Location = new System.Drawing.Point(557, 415);
-            this.saveFileButton.Name = "saveFileButton";
-            this.saveFileButton.Size = new System.Drawing.Size(75, 23);
-            this.saveFileButton.TabIndex = 0;
-            this.saveFileButton.Text = "Save File";
-            this.saveFileButton.UseVisualStyleBackColor = true;
-            this.saveFileButton.Click += new System.EventHandler(this.saveFileButton_Click);
             // 
             // openFileDialog
             // 
@@ -90,7 +79,7 @@
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Sorted File Content:";
-            //
+            // 
             // btnClearData
             // 
             this.btnClearData.Enabled = false;
@@ -102,11 +91,11 @@
             this.btnClearData.UseVisualStyleBackColor = true;
             this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
             // 
-            // SelectFilesToSaveButton
+            // btnSelectFilesToSave
             // 
             this.btnSelectFilesToSave.Enabled = false;
             this.btnSelectFilesToSave.Location = new System.Drawing.Point(638, 415);
-            this.btnSelectFilesToSave.Name = "btnSelectFileToSave";
+            this.btnSelectFilesToSave.Name = "btnSelectFilesToSave";
             this.btnSelectFilesToSave.Size = new System.Drawing.Size(150, 23);
             this.btnSelectFilesToSave.TabIndex = 4;
             this.btnSelectFilesToSave.Text = "Select file(s) to save";
@@ -157,7 +146,7 @@
             this.resultSearch.Multiline = true;
             this.resultSearch.Name = "resultSearch";
             this.resultSearch.ReadOnly = true;
-            this.resultSearch.Size = new System.Drawing.Size(353, 226);
+            this.resultSearch.Size = new System.Drawing.Size(353, 304);
             this.resultSearch.TabIndex = 9;
             this.resultSearch.TabStop = false;
             // 
@@ -176,7 +165,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAddFiles);
-            this.Controls.Add(this.saveFileButton);
             this.Name = "Form1";
             this.Text = "File Text Searcher";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -188,7 +176,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddFiles;
-        private System.Windows.Forms.Button saveFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.DataGridView dataGridView1;
