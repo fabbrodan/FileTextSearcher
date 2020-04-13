@@ -10,28 +10,7 @@ namespace SearchClassLibrary
         {
 
         }
-
-        
-        /// <summary>
-        /// Method to convert string of text to an array of words
-        /// </summary>
-        /// <param name="file">Text from text document</param>
-        /// <returns>String array containing extracted words from <paramref name="file"/></returns>
-        public List<string> ConvertString(List<IList<string>> file)
-        {
-            //List<string> text = file.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-            //List<string> text = file.ToList<string>;
-            //return text;
-            List<string> result = new List<string>();
-            foreach (var value in file)
-            {
-                //result.Add(value);
-            }
-            //List<string> result = file.ToList<string>;
-            return result;
-        }
-
-        
+                       
         /// <summary>
         /// Using Linq to create a query to find the searched word within a text file. Input word can match captial letter and regular
         /// </summary>

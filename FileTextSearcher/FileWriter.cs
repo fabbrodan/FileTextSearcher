@@ -41,10 +41,18 @@ namespace FileTextSearcher
                 {
                     if (fileName != "")
                     {
-                        string newFilePath = Path.Combine(filePath, fileName + ".txt");
-                        using (StreamWriter sw = new StreamWriter(newFilePath))
+                        string newFilePath = Path.Combine(filePath, fileName + "_sorted.txt");
+                        if (!File.Exists(newFilePath))
                         {
-                            WriteToFile(sw, sortedListOfWords);
+                            using (StreamWriter sw = new StreamWriter(newFilePath))
+                            {
+                                WriteToFile(sw, sortedListOfWords);
+                            }
+                        }
+                        else
+                        {
+                            throw new ArgumentException();
+
                         }
                     }
                     else
