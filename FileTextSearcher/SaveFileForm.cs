@@ -52,6 +52,14 @@ namespace FileTextSearcher
         /// </summary>
         private void DisplayFilesToSave()
         {
+            int rowCount = dataGridViewForFiles.Rows.Count;
+            if (rowCount > 0)
+            {
+                for (int i = rowCount - 1; i >= 0; i--)
+                {
+                    dataGridViewForFiles.Rows.RemoveAt(i);
+                }
+            }
             //Adds rows from all available files
             if (listOfFilesToSave.Count > 0)
             {
@@ -89,7 +97,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //only file path column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 2)
@@ -167,5 +175,33 @@ namespace FileTextSearcher
             return numberOfSelected;
         }
 
+        private void mergeBtn_Click(object sender, EventArgs e)
+        {
+            List<FileToSave> filesToSave = new List<FileToSave>();
+
+            if (GetNumberOfSelectedFiles() > 0)
+            {
+                foreach (DataGridViewRow selectedRow in dataGridViewForFiles.Rows)
+                {
+                    if ((bool)selectedRow.Cells[0].Value == true)
+                    {
+                        filesToSave.Add(new FileToSave(
+                            (string)selectedRow.Cells[1].Value,
+                            (string)selectedRow.Cells[2].Value,
+                            listOfFilesToSave.Find(f => f.name == (string)selectedRow.Cells[1].Value).listOfWords
+                            ));
+                    }
+                }
+            }
+
+            Merger merger = new Merger(filesToSave);
+            var sortedMergedList = merger.Merge();
+            DataSorter<string> sorter = new DataSorter<string>(sortedMergedList);
+            sorter.QuickSortAscending();
+            FileToSave mergedFile = new FileToSave("", "", sortedMergedList);
+            listOfFilesToSave.Add(mergedFile);
+
+            DisplayFilesToSave();
+        }
     }
 }
