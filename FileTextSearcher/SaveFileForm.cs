@@ -175,32 +175,41 @@ namespace FileTextSearcher
             return numberOfSelected;
         }
 
+        /// <summary>
+        /// Internal method for merging selected files and display the results
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mergeBtn_Click(object sender, EventArgs e)
         {
+            // Internal list of FileToSaves
             List<FileToSave> filesToSave = new List<FileToSave>();
 
             if (GetNumberOfSelectedFiles() > 0)
             {
+                // Iterate over all selected rows and add them as FileToSave to internal list
                 foreach (DataGridViewRow selectedRow in dataGridViewForFiles.Rows)
                 {
-                    if ((bool)selectedRow.Cells[0].Value == true)
-                    {
-                        filesToSave.Add(new FileToSave(
-                            (string)selectedRow.Cells[1].Value,
-                            (string)selectedRow.Cells[2].Value,
-                            listOfFilesToSave.Find(f => f.name == (string)selectedRow.Cells[1].Value).listOfWords
-                            ));
-                    }
+                    filesToSave.Add(new FileToSave(
+                        (string)selectedRow.Cells[1].Value,
+                        (string)selectedRow.Cells[2].Value,
+                        listOfFilesToSave.Find(f => f.name == (string)selectedRow.Cells[1].Value).listOfWords
+                        ));
                 }
             }
 
+            // Pass internal list to merger
             Merger merger = new Merger(filesToSave);
             var sortedMergedList = merger.Merge();
+            // Sort the merged list
             DataSorter<string> sorter = new DataSorter<string>(sortedMergedList);
             sorter.QuickSortAscending();
+            // Generate new FileToSave with the merged and sorted content
             FileToSave mergedFile = new FileToSave("", "", sortedMergedList);
+            // Add new FileToSave obj to class list of files to save
             listOfFilesToSave.Add(mergedFile);
 
+            // Display all new files
             DisplayFilesToSave();
         }
     }
