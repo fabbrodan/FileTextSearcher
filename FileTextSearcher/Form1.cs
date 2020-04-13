@@ -17,6 +17,7 @@ namespace FileTextSearcher
         private static List<ReadFile> readFiles = new List<ReadFile>();
         private static List<IList<string>> SortedWords = new List<IList<string>>();
         private static List<FileToSave> listOfFilesToSave = new List<FileToSave>();
+        private static bool asc = true;
         public Form1()
         {
             InitializeComponent();
@@ -53,6 +54,8 @@ namespace FileTextSearcher
                 }
                 searchInputField.Enabled = true;
                 btnClearData.Enabled = true;
+                btnAscDesc.Enabled = true;
+
                 DisplaySortResult();
             }
         }
@@ -157,6 +160,7 @@ namespace FileTextSearcher
             searchInputField.Text = string.Empty;
             resultSearch.Text = string.Empty;
             btnSelectFilesToSave.Enabled = false;
+            btnAscDesc.Enabled = false;
         }
 
         /// <summary>
@@ -221,6 +225,39 @@ namespace FileTextSearcher
             //Cleares search textbox after each search
             searchInputField.Text = string.Empty;
             btn_Search.Enabled = false;
+        }
+        /// <summary>
+        /// This button swaps the sorted list from ascending to descending
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAscDesc_Click(object sender, EventArgs e)
+        {
+            SortedWords.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            if (asc)
+            {
+                foreach (var item in readFiles)
+                {
+                    DataSorter<string> sorter = new DataSorter<string>(item.Words);
+                    sorter.QuickSortDescending();
+                    SortedWords.Add(sorter.Get());
+                }
+                asc = false;
+            }
+            else
+            {
+                foreach (var item in readFiles)
+                {
+                    DataSorter<string> sorter = new DataSorter<string>(item.Words);
+                    sorter.QuickSortAscending();
+                    SortedWords.Add(sorter.Get());
+                }
+                asc = true;
+            }
+            DisplaySortResult();
         }
     }
 }

@@ -41,6 +41,7 @@
             this.btn_Search = new System.Windows.Forms.Button();
             this.resultLabel = new System.Windows.Forms.Label();
             this.resultSearch = new System.Windows.Forms.TextBox();
+            this.btnAscDesc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,7 +91,7 @@
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Sorted File Content:";
-            //
+            // 
             // btnClearData
             // 
             this.btnClearData.Enabled = false;
@@ -102,11 +103,11 @@
             this.btnClearData.UseVisualStyleBackColor = true;
             this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
             // 
-            // SelectFilesToSaveButton
+            // btnSelectFilesToSave
             // 
             this.btnSelectFilesToSave.Enabled = false;
             this.btnSelectFilesToSave.Location = new System.Drawing.Point(638, 415);
-            this.btnSelectFilesToSave.Name = "btnSelectFileToSave";
+            this.btnSelectFilesToSave.Name = "btnSelectFilesToSave";
             this.btnSelectFilesToSave.Size = new System.Drawing.Size(150, 23);
             this.btnSelectFilesToSave.TabIndex = 4;
             this.btnSelectFilesToSave.Text = "Select file(s) to save";
@@ -161,11 +162,23 @@
             this.resultSearch.TabIndex = 9;
             this.resultSearch.TabStop = false;
             // 
+            // btnAscDesc
+            // 
+            this.btnAscDesc.Enabled = false;
+            this.btnAscDesc.Location = new System.Drawing.Point(93, 415);
+            this.btnAscDesc.Name = "btnAscDesc";
+            this.btnAscDesc.Size = new System.Drawing.Size(213, 23);
+            this.btnAscDesc.TabIndex = 10;
+            this.btnAscDesc.Text = "↑ ↓ - Ascending/Descending";
+            this.btnAscDesc.UseVisualStyleBackColor = true;
+            this.btnAscDesc.Click += new System.EventHandler(this.btnAscDesc_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAscDesc);
             this.Controls.Add(this.resultSearch);
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.btn_Search);
@@ -200,6 +213,7 @@
         private System.Windows.Forms.Button btn_Search;
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.TextBox resultSearch;
+        private System.Windows.Forms.Button btnAscDesc;
     }
 }
 
