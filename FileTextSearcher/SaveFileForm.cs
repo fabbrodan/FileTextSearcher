@@ -22,10 +22,17 @@ namespace FileTextSearcher
         {
             InitializeComponent();
             listOfFilesToSave = listOfFiles;
+            AddColumnsToDataGridView();
+            DisplayFilesToSave();
+        }
+
+        /// <summary>
+        /// Adds the columns to the DataGridView
+        /// </summary>
+        private void AddColumnsToDataGridView() {
             //Column for checkbox
             DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
             checkColumn.HeaderText = "Save";
-            checkColumn.Name = "saveCheckbox";
             checkColumn.Width = 50;
             dataGridViewForFiles.Columns.Add(checkColumn);
 
@@ -43,8 +50,6 @@ namespace FileTextSearcher
             pathColumn.ReadOnly = true;
             pathColumn.Width = 400;
             dataGridViewForFiles.Columns.Add(pathColumn);
-
-            DisplayFilesToSave();
         }
 
         /// <summary>
@@ -167,6 +172,7 @@ namespace FileTextSearcher
             }
             return numberOfSelected;
         }
+
         /// <summary>
         /// Selects or unselects all files
         /// </summary>
