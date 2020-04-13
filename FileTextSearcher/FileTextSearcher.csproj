@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Merger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadFile.cs" />
@@ -94,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SearchClassLibrary\SearchClassLibrary.csproj">
-      <Project>{1383D0DB-2D00-4A08-BEB3-9FD6456BDC32}</Project>
+      <Project>{1383d0db-2d00-4a08-beb3-9fd6456bdc32}</Project>
       <Name>SearchClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>

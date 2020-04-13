@@ -78,6 +78,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(375, 376);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -89,7 +90,7 @@
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Sorted File Content:";
-            // 
+            //
             // btnClearData
             // 
             this.btnClearData.Enabled = false;
@@ -97,7 +98,7 @@
             this.btnClearData.Name = "btnClearData";
             this.btnClearData.Size = new System.Drawing.Size(75, 23);
             this.btnClearData.TabIndex = 3;
-            this.btnClearData.Text = "Clear data";
+            this.btnClearData.Text = "Clear";
             this.btnClearData.UseVisualStyleBackColor = true;
             this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
             // 

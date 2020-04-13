@@ -132,6 +132,7 @@ namespace FileTextSearcher
                 MessageBox.Show("No files have been loaded");
             }
         }
+
         /// <summary>
         /// This button calls on cleardata to clear all previous data.
         /// </summary>
@@ -221,6 +222,5 @@ namespace FileTextSearcher
             searchInputField.Text = string.Empty;
             btn_Search.Enabled = false;
         }
-
     }
 }
