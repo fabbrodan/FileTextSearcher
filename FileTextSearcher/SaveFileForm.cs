@@ -29,7 +29,8 @@ namespace FileTextSearcher
         /// <summary>
         /// Adds the columns to the DataGridView
         /// </summary>
-        private void AddColumnsToDataGridView() {
+        private void AddColumnsToDataGridView()
+        {
             //Column for checkbox
             DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
             checkColumn.HeaderText = "Save";
@@ -94,7 +95,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //only file path column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 2)
@@ -107,12 +108,36 @@ namespace FileTextSearcher
                 }
             }
         }
+
+        /// <summary>
+        /// Dynamically changes the text of the select all button and the boolean related to the click function based on number of selected files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == 0)
+            {
+                //Changes the value to the current values opposite, eg false -> true 
+                ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[e.RowIndex].Cells[0]).Value = !(bool)dataGridViewForFiles.Rows[e.RowIndex].Cells[0].Value;
+                if (GetNumberOfSelectedFiles() == listOfFilesToSave.Count())
+                {
+                    selectedAll = true;
+                    selectAllFilesBtn.Text = "Unselect all files";
+                }
+                else
+                {
+                    selectedAll = false;
+                    selectAllFilesBtn.Text = "Select all files";
+                }
+            }
+        }
         /// <summary>
         /// Allows the user to change the file name when double clicking on a vlue in the file name column
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewForFiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             //only file name column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
@@ -197,7 +222,8 @@ namespace FileTextSearcher
                 selectedAll = true;
                 selectAllFilesBtn.Text = "Unselect all files";
             }
-            else {
+            else
+            {
                 for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
                 {
                     ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[i].Cells[0]).Value = false;

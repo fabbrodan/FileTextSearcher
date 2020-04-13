@@ -56,8 +56,9 @@
             this.dataGridViewForFiles.RowTemplate.Height = 20;
             this.dataGridViewForFiles.Size = new System.Drawing.Size(776, 384);
             this.dataGridViewForFiles.TabIndex = 2;
-            this.dataGridViewForFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellClick);
-            this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellValueChanged);
+            this.dataGridViewForFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellClick);
+            this.dataGridViewForFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellContentClick);
+            this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellValueChanged);
             // 
             // instructionLabel
             // 
