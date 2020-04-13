@@ -25,7 +25,7 @@ namespace FileTextSearcher
 
 
         //This method opens a FileDialog where you can browse and open one or multiple files.
-        private void btnAddFiles_Click(object sender, EventArgs e)
+        private void BtnAddFiles_Click(object sender, EventArgs e)
         {
             openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -109,7 +109,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnClearData_Click(object sender, EventArgs e)
+        private void BtnClearData_Click(object sender, EventArgs e)
         {
             ClearData();
         }
@@ -136,7 +136,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSelectFilesToSave_Click(object sender, EventArgs e)
+        private void BtnSelectFilesToSave_Click(object sender, EventArgs e)
         {
             //Empty list before creating new form
             listOfFilesToSave.Clear();
@@ -159,7 +159,7 @@ namespace FileTextSearcher
 
         //Searches the files for the given word when button is clicked
         //Displays filename and result in a textbox
-        private void btn_Search_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             //When the search button is clicked, textbox will be cleared and new serach result displayed
             resultSearch.Text = string.Empty;

@@ -51,7 +51,7 @@
             this.btnAddFiles.TabIndex = 0;
             this.btnAddFiles.Text = "Add file(s)";
             this.btnAddFiles.UseVisualStyleBackColor = true;
-            this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
+            this.btnAddFiles.Click += new System.EventHandler(this.BtnAddFiles_Click);
             // 
             // openFileDialog
             // 
@@ -89,7 +89,7 @@
             this.btnClearData.TabIndex = 3;
             this.btnClearData.Text = "Clear";
             this.btnClearData.UseVisualStyleBackColor = true;
-            this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
+            this.btnClearData.Click += new System.EventHandler(this.BtnClearData_Click);
             // 
             // btnSelectFilesToSave
             // 
@@ -100,7 +100,7 @@
             this.btnSelectFilesToSave.TabIndex = 4;
             this.btnSelectFilesToSave.Text = "Select file(s) to save";
             this.btnSelectFilesToSave.UseVisualStyleBackColor = true;
-            this.btnSelectFilesToSave.Click += new System.EventHandler(this.btnSelectFilesToSave_Click);
+            this.btnSelectFilesToSave.Click += new System.EventHandler(this.BtnSelectFilesToSave_Click);
             // 
             // searchLabel
             // 
@@ -124,12 +124,12 @@
             // 
             this.btn_Search.Enabled = false;
             this.btn_Search.Location = new System.Drawing.Point(610, 31);
-            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Name = "btnSearch";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 7;
             this.btn_Search.Text = "Search";
             this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            this.btn_Search.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // resultLabel
             // 
