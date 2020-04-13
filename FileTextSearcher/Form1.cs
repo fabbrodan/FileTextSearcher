@@ -200,13 +200,25 @@ namespace FileTextSearcher
 
             if (word.Length > 0)
             {
+                // List to sort for results
+                List<SearchResult> resultList = new List<SearchResult>();
+
                 //Loop file/files to get filename and count of matches for the searched word
                 for (int i = 0; i < SortedWords.Count; i++)
                 {
                     var wordCount = search.MatchOnSearchedWord(SortedWords[i], word);
                     var fileName = Path.GetFileNameWithoutExtension(readFiles[i].FileName);
 
-                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
+                    resultList.Add(new SearchResult(fileName, wordCount));
+                }
+
+                // Sort results using the standard CompareTo praxis
+                resultList.Sort();
+
+                // Iterate over the sorted results and write out
+                foreach(var result in resultList)
+                {
+                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
                 }
             }
             else
@@ -258,6 +270,42 @@ namespace FileTextSearcher
                 asc = true;
             }
             DisplaySortResult();
+        }
+    }
+
+    /// <summary>
+    /// Object to handle search results.
+    /// </summary>
+    /// <remarks>
+    /// Needs to implement IComparable for the purpose of sorting lists
+    /// </remarks>
+    internal class SearchResult : IComparable
+    {
+        public string FileName { get; set; }
+        public int MatchCount { get; set; }
+
+        public SearchResult(string Filename, int MatchCount)
+        {
+            this.FileName = Filename;
+            this.MatchCount = MatchCount;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is SearchResult r)
+            {
+                if (r.MatchCount > this.MatchCount)
+                {
+                    return 1;
+                }
+                else if (r.MatchCount < this.MatchCount)
+                {
+                    return -1;
+                }
+                return 0;
+            }
+
+            return -99;
         }
     }
 }
