@@ -120,12 +120,13 @@
             this.searchInputField.Size = new System.Drawing.Size(172, 20);
             this.searchInputField.TabIndex = 6;
             this.searchInputField.TextChanged += new System.EventHandler(this.SearchInputField_TextChanged);
+            this.searchInputField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchInputField_KeyDown);
             // 
             // btn_Search
             // 
             this.btn_Search.Enabled = false;
             this.btn_Search.Location = new System.Drawing.Point(610, 31);
-            this.btn_Search.Name = "btnSearch";
+            this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 7;
             this.btn_Search.Text = "Search";
@@ -158,6 +159,7 @@
             this.btnAscDesc.Name = "btnAscDesc";
             this.btnAscDesc.Size = new System.Drawing.Size(213, 23);
             this.btnAscDesc.TabIndex = 10;
+            this.btnAscDesc.Enabled = false;
             this.btnAscDesc.Text = "↑ ↓ - Ascending/Descending";
             this.btnAscDesc.UseVisualStyleBackColor = true;
             this.btnAscDesc.Click += new System.EventHandler(this.btnAscDesc_Click);

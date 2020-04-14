@@ -198,7 +198,7 @@ namespace FileTextSearcher
                 resultList.Sort();
 
                 // Iterate over the sorted results and write out
-                foreach(var result in resultList)
+                foreach (var result in resultList)
                 {
                     resultString += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
                 }
@@ -240,6 +240,18 @@ namespace FileTextSearcher
                 asc = true;
             }
             DisplaySortResult();
+        }
+        /// <summary>
+        /// Clicking in enter in search field triggers the search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void searchInputField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSearch_Click(this, new EventArgs());
+            }
         }
     }
 
