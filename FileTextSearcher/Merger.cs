@@ -9,14 +9,14 @@ namespace FileTextSearcher
 {
     public class Merger
     {
-        public IList<ReadFile> Files { get; }
+        public IList<FileToSave> Files { get; }
         private IList<string> MergedData;
 
         /// <summary>
         /// Instantiates a new instancen of the Merger class
         /// </summary>
-        /// <param name="Files">The array of <see cref="ReadFile"/> to be merged</param>
-        public Merger(ReadFile[] Files)
+        /// <param name="Files">The array of <see cref="FileToSave"/> to be merged</param>
+        public Merger(FileToSave[] Files)
         {
             this.Files = Files;
         }
@@ -24,8 +24,8 @@ namespace FileTextSearcher
         /// <summary>
         /// Instantiates a new instancen of the Merger class
         /// </summary>
-        /// <param name="Files">The List of <see cref="ReadFile"/> to be merged</param>
-        public Merger(List<ReadFile> Files)
+        /// <param name="Files">The List of <see cref="FileToSave"/> to be merged</param>
+        public Merger(List<FileToSave> Files)
         {
             this.Files = Files;
         }
@@ -39,7 +39,7 @@ namespace FileTextSearcher
 
             foreach (var file in Files)
             {
-                foreach (var word in file.Words)
+                foreach (var word in file.listOfWords)
                 {
                     MergedData.Add(word);
                 }

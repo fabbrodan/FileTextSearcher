@@ -17,6 +17,7 @@ namespace FileTextSearcher
         private static List<ReadFile> readFiles = new List<ReadFile>();
         private static List<IList<string>> SortedWords = new List<IList<string>>();
         private static List<FileToSave> listOfFilesToSave = new List<FileToSave>();
+        private static bool asc = true;
         public Form1()
         {
             InitializeComponent();
@@ -54,6 +55,8 @@ namespace FileTextSearcher
                 }
                 searchInputField.Enabled = true;
                 btnClearData.Enabled = true;
+                btnAscDesc.Enabled = true;
+
                 DisplaySortResult();
             }
         }
@@ -129,6 +132,7 @@ namespace FileTextSearcher
             searchInputField.Text = string.Empty;
             resultSearch.Text = string.Empty;
             btnSelectFilesToSave.Enabled = false;
+            btnAscDesc.Enabled = false;
         }
 
         /// <summary>
@@ -178,20 +182,100 @@ namespace FileTextSearcher
 
             else if (word.Length > 0)
             {
+                // List to sort for results
+                List<SearchResult> resultList = new List<SearchResult>();
+
                 //Loop file/files to get filename and count of matches for the searched word
                 for (int i = 0; i < SortedWords.Count; i++)
                 {
                     var wordCount = search.MatchOnSearchedWord(SortedWords[i], word);
                     var fileName = Path.GetFileNameWithoutExtension(readFiles[i].FileName);
 
-                    resultString += "\nThe searched word '" + word + "' was found " + wordCount + " times in File: " + fileName + " \r";
+                    resultList.Add(new SearchResult(fileName, wordCount));
+                }
+
+                // Sort results using the standard CompareTo praxis
+                resultList.Sort();
+
+                // Iterate over the sorted results and write out
+                foreach(var result in resultList)
+                {
+                    resultString += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
                 }
             }
             resultSearch.Text = resultString;
             //Cleares search textbox after each search
             searchInputField.Text = string.Empty;
-            word = string.Empty;
             btn_Search.Enabled = false;
+        }
+        /// <summary>
+        /// This button swaps the sorted list from ascending to descending
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAscDesc_Click(object sender, EventArgs e)
+        {
+            SortedWords.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            if (asc)
+            {
+                foreach (var item in readFiles)
+                {
+                    DataSorter<string> sorter = new DataSorter<string>(item.Words);
+                    sorter.QuickSortDescending();
+                    SortedWords.Add(sorter.Get());
+                }
+                asc = false;
+            }
+            else
+            {
+                foreach (var item in readFiles)
+                {
+                    DataSorter<string> sorter = new DataSorter<string>(item.Words);
+                    sorter.QuickSortAscending();
+                    SortedWords.Add(sorter.Get());
+                }
+                asc = true;
+            }
+            DisplaySortResult();
+        }
+    }
+
+    /// <summary>
+    /// Object to handle search results.
+    /// </summary>
+    /// <remarks>
+    /// Needs to implement IComparable for the purpose of sorting lists
+    /// </remarks>
+    internal class SearchResult : IComparable
+    {
+        public string FileName { get; set; }
+        public int MatchCount { get; set; }
+
+        public SearchResult(string Filename, int MatchCount)
+        {
+            this.FileName = Filename;
+            this.MatchCount = MatchCount;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is SearchResult r)
+            {
+                if (r.MatchCount > this.MatchCount)
+                {
+                    return 1;
+                }
+                else if (r.MatchCount < this.MatchCount)
+                {
+                    return -1;
+                }
+                return 0;
+            }
+
+            return -99;
         }
     }
 }

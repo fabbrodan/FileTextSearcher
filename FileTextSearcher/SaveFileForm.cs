@@ -58,6 +58,14 @@ namespace FileTextSearcher
         /// </summary>
         private void DisplayFilesToSave()
         {
+            int rowCount = dataGridViewForFiles.Rows.Count;
+            if (rowCount > 0)
+            {
+                for (int i = rowCount - 1; i >= 0; i--)
+                {
+                    dataGridViewForFiles.Rows.RemoveAt(i);
+                }
+            }
             //Adds rows from all available files
             if (listOfFilesToSave.Count > 0)
             {
@@ -110,16 +118,26 @@ namespace FileTextSearcher
         }
 
         /// <summary>
-        /// Dynamically changes the text of the select all button and the boolean related to the click function based on number of selected files
+        /// Does something whenever a user interacts with a checkbox in the Save Column
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1 && e.ColumnIndex == 0)
-            {
-                //Changes the value to the current values opposite, eg false -> true 
+            {   //Changes the value to the current values opposite, eg false -> true 
                 ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[e.RowIndex].Cells[0]).Value = !(bool)dataGridViewForFiles.Rows[e.RowIndex].Cells[0].Value;
+                //Makes sure that mergBtn is only enabled if the user selected 2 or more files
+                if (GetNumberOfSelectedFiles() > 1)
+                {
+                    mergeBtn.Enabled = true;
+                }
+                else
+                {
+                    mergeBtn.Enabled = false;
+                }
+                
+                //Changes the select all files button value depending on how many files are selected
                 if (GetNumberOfSelectedFiles() == listOfFilesToSave.Count())
                 {
                     selectedAll = true;
@@ -208,6 +226,53 @@ namespace FileTextSearcher
         }
 
         /// <summary>
+        /// Internal method for merging selected files and display the results
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MergeBtn_Click(object sender, EventArgs e)
+        {
+            // Internal list of FileToSaves
+            List<FileToSave> filesToSave = new List<FileToSave>();
+            string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string defaultName = "";
+
+            if (GetNumberOfSelectedFiles() > 0)
+            {
+                // Iterate over all selected rows and add them as FileToSave to internal list
+                foreach (DataGridViewRow selectedRow in dataGridViewForFiles.Rows)
+                {
+                    filesToSave.Add(new FileToSave(
+                        (string)selectedRow.Cells[1].Value,
+                        (string)selectedRow.Cells[2].Value,
+                        listOfFilesToSave.Find(f => f.name == (string)selectedRow.Cells[1].Value).listOfWords
+                        ));
+                    if (defaultName == "")
+                    {
+                        defaultName += selectedRow.Cells[1].Value;
+                    }
+                    else
+                    {
+                        defaultName += "+" + selectedRow.Cells[1].Value;
+                    }
+                }
+            }
+
+            // Pass internal list to merger
+            Merger merger = new Merger(filesToSave);
+            var sortedMergedList = merger.Merge();
+            // Sort the merged list
+            DataSorter<string> sorter = new DataSorter<string>(sortedMergedList);
+            sorter.QuickSortAscending();
+            // Generate new FileToSave with the merged and sorted content
+            FileToSave mergedFile = new FileToSave(defaultPath, defaultName, sortedMergedList);
+            // Add new FileToSave obj to class list of files to save
+            listOfFilesToSave.Add(mergedFile);
+
+            // Display all new files
+            DisplayFilesToSave();
+        }
+        ///<summary>
         /// Selects or unselects all files
         /// </summary>
         private bool selectedAll = false;

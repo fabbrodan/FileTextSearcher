@@ -31,6 +31,7 @@
             this.saveFilesButton = new System.Windows.Forms.Button();
             this.dataGridViewForFiles = new System.Windows.Forms.DataGridView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.mergeBtn = new System.Windows.Forms.Button();
             this.instructionLabel = new System.Windows.Forms.Label();
             this.selectAllFilesBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).BeginInit();
@@ -60,6 +61,17 @@
             this.dataGridViewForFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellContentClick);
             this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellValueChanged);
             // 
+            // mergeBtn
+            // 
+            this.mergeBtn.Location = new System.Drawing.Point(528, 415);
+            this.mergeBtn.Name = "mergeBtn";
+            this.mergeBtn.Size = new System.Drawing.Size(75, 23);
+            this.mergeBtn.TabIndex = 4;
+            this.mergeBtn.Text = "Merge Files";
+            this.mergeBtn.UseVisualStyleBackColor = true;
+            this.mergeBtn.Click += new System.EventHandler(this.MergeBtn_Click);
+            this.mergeBtn.Enabled = false;
+            // 
             // instructionLabel
             // 
             this.instructionLabel.AutoSize = true;
@@ -85,6 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.mergeBtn);
             this.Controls.Add(this.selectAllFilesBtn);
             this.Controls.Add(this.instructionLabel);
             this.Controls.Add(this.dataGridViewForFiles);
@@ -101,6 +114,7 @@
         private System.Windows.Forms.Button saveFilesButton;
         private System.Windows.Forms.DataGridView dataGridViewForFiles;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button mergeBtn;
         private System.Windows.Forms.Label instructionLabel;
         private System.Windows.Forms.Button selectAllFilesBtn;
     }
