@@ -175,7 +175,9 @@ namespace FileTextSearcher
             if (searchInputField.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("Please enter a valid input");
-                return;
+                searchInputField.Text = string.Empty;
+                searchInputField.Focus();
+                btn_Search.Enabled = false;
             }
 
             else if (word.Length > 0)
