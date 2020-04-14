@@ -26,10 +26,11 @@ namespace FileTextSearcher
 
 
         //This method opens a FileDialog where you can browse and open one or multiple files.
-        private void btnAddFiles_Click(object sender, EventArgs e)
+        private void BtnAddFiles_Click(object sender, EventArgs e)
         {
             openFileDialog.Filter = "Text files |*.txt"; // Only allows for .txt files to be opened.
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.FileName = string.Empty;
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -105,43 +106,14 @@ namespace FileTextSearcher
                 }
             }
         }
-        private void saveFileButton_Click(object sender, EventArgs e)
-        {
-            FileWriter fw = new FileWriter();
 
-            // Verify that there are files loaded
-            if (readFiles.Count > 0)
-            {
-                // Iterate over the files loaded and save content
-                foreach (ReadFile file in readFiles)
-                {
-                    saveFileDialog.Filter = "Text Files|*.txt";
-                    //select file rather than index 0 in readFiles
-                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string fullPath = saveFileDialog.FileName;
-                        string fileName = Path.GetFileNameWithoutExtension(fullPath);
-                        string fullDirectoryPath = Path.GetDirectoryName(fullPath);
-                        //select a file rather than just index 0 in SortedWords
-                        fw.SaveFile(fullDirectoryPath, fileName, file.Words);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("No files have been loaded");
-            }
-        }
 
         /// <summary>
         /// This button calls on cleardata to clear all previous data.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnClearData_Click(object sender, EventArgs e)
+        private void BtnClearData_Click(object sender, EventArgs e)
         {
             ClearData();
         }
@@ -169,7 +141,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSelectFilesToSave_Click(object sender, EventArgs e)
+        private void BtnSelectFilesToSave_Click(object sender, EventArgs e)
         {
             //Empty list before creating new form
             listOfFilesToSave.Clear();
@@ -180,10 +152,11 @@ namespace FileTextSearcher
             SaveFileForm saveFileForm = new SaveFileForm(listOfFilesToSave);
             saveFileForm.Show();
         }
+
         //Variable for searched word
         private string word;
         //Textbox for entering a word
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void SearchInputField_TextChanged(object sender, EventArgs e)
         {
             btn_Search.Enabled = true;
             word = searchInputField.Text;
@@ -191,14 +164,21 @@ namespace FileTextSearcher
 
         //Searches the files for the given word when button is clicked
         //Displays filename and result in a textbox
-        private void btn_Search_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             //When the search button is clicked, textbox will be cleared and new serach result displayed
             resultSearch.Text = string.Empty;
+            string resultString = string.Empty;
 
             SearchClass search = new SearchClass();
 
-            if (word.Length > 0)
+            if (searchInputField.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please enter a valid input");
+                return;
+            }
+
+            else if (word.Length > 0)
             {
                 // List to sort for results
                 List<SearchResult> resultList = new List<SearchResult>();
@@ -218,22 +198,10 @@ namespace FileTextSearcher
                 // Iterate over the sorted results and write out
                 foreach(var result in resultList)
                 {
-                    resultSearch.Text += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
+                    resultString += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
                 }
             }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(searchInputField.Text))
-                {
-                    MessageBox.Show("Please enter a valid input");
-                    resultSearch.Text = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("Please enter a valid input");
-                    resultSearch.Text = string.Empty;
-                }
-            }
+            resultSearch.Text = resultString;
             //Cleares search textbox after each search
             searchInputField.Text = string.Empty;
             btn_Search.Enabled = false;

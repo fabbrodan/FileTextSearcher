@@ -31,8 +31,9 @@
             this.saveFilesButton = new System.Windows.Forms.Button();
             this.dataGridViewForFiles = new System.Windows.Forms.DataGridView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
             this.mergeBtn = new System.Windows.Forms.Button();
+            this.instructionLabel = new System.Windows.Forms.Label();
+            this.selectAllFilesBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,28 +57,40 @@
             this.dataGridViewForFiles.RowTemplate.Height = 20;
             this.dataGridViewForFiles.Size = new System.Drawing.Size(776, 384);
             this.dataGridViewForFiles.TabIndex = 2;
-            this.dataGridViewForFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellClick);
-            this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewForFiles_CellValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(568, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Click the checkbox for each file you want to save, double click on name of file t" +
-    "o edit name or path to selct a new path ";
+            this.dataGridViewForFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellClick);
+            this.dataGridViewForFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellContentClick);
+            this.dataGridViewForFiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewForFiles_CellValueChanged);
             // 
             // mergeBtn
             // 
-            this.mergeBtn.Location = new System.Drawing.Point(610, 415);
+            this.mergeBtn.Location = new System.Drawing.Point(528, 415);
             this.mergeBtn.Name = "mergeBtn";
             this.mergeBtn.Size = new System.Drawing.Size(75, 23);
             this.mergeBtn.TabIndex = 4;
             this.mergeBtn.Text = "Merge Files";
             this.mergeBtn.UseVisualStyleBackColor = true;
-            this.mergeBtn.Click += new System.EventHandler(this.mergeBtn_Click);
+            this.mergeBtn.Click += new System.EventHandler(this.MergeBtn_Click);
+            this.mergeBtn.Enabled = false;
+            // 
+            // instructionLabel
+            // 
+            this.instructionLabel.AutoSize = true;
+            this.instructionLabel.Location = new System.Drawing.Point(12, 9);
+            this.instructionLabel.Name = "instructionLabel";
+            this.instructionLabel.Size = new System.Drawing.Size(574, 13);
+            this.instructionLabel.TabIndex = 3;
+            this.instructionLabel.Text = "Click the checkbox for each file you want to save, double click on name of file t" +
+    "o edit name or path to select a new path ";
+            // 
+            // selectAllFilesBtn
+            // 
+            this.selectAllFilesBtn.Location = new System.Drawing.Point(609, 415);
+            this.selectAllFilesBtn.Name = "selectAllFilesBtn";
+            this.selectAllFilesBtn.Size = new System.Drawing.Size(98, 23);
+            this.selectAllFilesBtn.TabIndex = 4;
+            this.selectAllFilesBtn.Text = "Select all files";
+            this.selectAllFilesBtn.UseVisualStyleBackColor = true;
+            this.selectAllFilesBtn.Click += new System.EventHandler(this.SelectAllFiles_click);
             // 
             // SaveFileForm
             // 
@@ -85,7 +98,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.mergeBtn);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.selectAllFilesBtn);
+            this.Controls.Add(this.instructionLabel);
             this.Controls.Add(this.dataGridViewForFiles);
             this.Controls.Add(this.saveFilesButton);
             this.Name = "SaveFileForm";
@@ -100,7 +114,8 @@
         private System.Windows.Forms.Button saveFilesButton;
         private System.Windows.Forms.DataGridView dataGridViewForFiles;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button mergeBtn;
+        private System.Windows.Forms.Label instructionLabel;
+        private System.Windows.Forms.Button selectAllFilesBtn;
     }
 }

@@ -22,6 +22,15 @@ namespace FileTextSearcher
         {
             InitializeComponent();
             listOfFilesToSave = listOfFiles;
+            AddColumnsToDataGridView();
+            DisplayFilesToSave();
+        }
+
+        /// <summary>
+        /// Adds the columns to the DataGridView
+        /// </summary>
+        private void AddColumnsToDataGridView()
+        {
             //Column for checkbox
             DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
             checkColumn.HeaderText = "Save";
@@ -42,9 +51,6 @@ namespace FileTextSearcher
             pathColumn.ReadOnly = true;
             pathColumn.Width = 400;
             dataGridViewForFiles.Columns.Add(pathColumn);
-            //disables row height resize by setting it to a default value
-            
-            DisplayFilesToSave();
         }
 
         /// <summary>
@@ -97,7 +103,7 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewForFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //only file path column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 2)
@@ -110,23 +116,67 @@ namespace FileTextSearcher
                 }
             }
         }
+
+        /// <summary>
+        /// Does something whenever a user interacts with a checkbox in the Save Column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridViewForFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == 0)
+            {   //Changes the value to the current values opposite, eg false -> true 
+                ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[e.RowIndex].Cells[0]).Value = !(bool)dataGridViewForFiles.Rows[e.RowIndex].Cells[0].Value;
+                //Makes sure that mergBtn is only enabled if the user selected 2 or more files
+                if (GetNumberOfSelectedFiles() > 1)
+                {
+                    mergeBtn.Enabled = true;
+                }
+                else
+                {
+                    mergeBtn.Enabled = false;
+                }
+                
+                //Changes the select all files button value depending on how many files are selected
+                if (GetNumberOfSelectedFiles() == listOfFilesToSave.Count())
+                {
+                    selectedAll = true;
+                    selectAllFilesBtn.Text = "Unselect all files";
+                }
+                else
+                {
+                    selectedAll = false;
+                    selectAllFilesBtn.Text = "Select all files";
+                }
+            }
+        }
         /// <summary>
         /// Allows the user to change the file name when double clicking on a vlue in the file name column
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewForFiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewForFiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             //only file name column and not in header row
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
                 if (dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null && dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Length > 0)
                 {
-                    listOfFilesToSave[e.RowIndex].name = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    RefreshFileNameColumn();
+                    string newCellValue = dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    if (newCellValue.IndexOfAny("/\\?\":|*<>".ToCharArray()) == -1)
+                    {
+                        listOfFilesToSave[e.RowIndex].name = newCellValue;
+                        RefreshFileNameColumn();
+                    }
+                    else
+                    {
+                        dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = listOfFilesToSave[e.RowIndex].name;
+                        MessageBox.Show("File name cannot contain the following characters: /\\?\":|*<>");
+                    }
                 }
                 else
                 {
+                    dataGridViewForFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = listOfFilesToSave[e.RowIndex].name;
                     MessageBox.Show("File name must be at least one character long");
                 }
             }
@@ -158,7 +208,7 @@ namespace FileTextSearcher
             }
         }
         /// <summary>
-        /// calculates the number of seleted files
+        /// calculates the number of selected files
         /// </summary>
         /// <returns></returns>
         private int GetNumberOfSelectedFiles()
@@ -180,10 +230,12 @@ namespace FileTextSearcher
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void mergeBtn_Click(object sender, EventArgs e)
+        private void MergeBtn_Click(object sender, EventArgs e)
         {
             // Internal list of FileToSaves
             List<FileToSave> filesToSave = new List<FileToSave>();
+            string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string defaultName = "";
 
             if (GetNumberOfSelectedFiles() > 0)
             {
@@ -195,6 +247,14 @@ namespace FileTextSearcher
                         (string)selectedRow.Cells[2].Value,
                         listOfFilesToSave.Find(f => f.name == (string)selectedRow.Cells[1].Value).listOfWords
                         ));
+                    if (defaultName == "")
+                    {
+                        defaultName += selectedRow.Cells[1].Value;
+                    }
+                    else
+                    {
+                        defaultName += "+" + selectedRow.Cells[1].Value;
+                    }
                 }
             }
 
@@ -205,12 +265,38 @@ namespace FileTextSearcher
             DataSorter<string> sorter = new DataSorter<string>(sortedMergedList);
             sorter.QuickSortAscending();
             // Generate new FileToSave with the merged and sorted content
-            FileToSave mergedFile = new FileToSave("", "", sortedMergedList);
+            FileToSave mergedFile = new FileToSave(defaultPath, defaultName, sortedMergedList);
             // Add new FileToSave obj to class list of files to save
             listOfFilesToSave.Add(mergedFile);
 
             // Display all new files
             DisplayFilesToSave();
+        }
+        ///<summary>
+        /// Selects or unselects all files
+        /// </summary>
+        private bool selectedAll = false;
+        private void SelectAllFiles_click(object sender, EventArgs e)
+        {
+            if (!selectedAll)
+            {
+                for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
+                {
+                    ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[i].Cells[0]).Value = true;
+                }
+                selectedAll = true;
+                selectAllFilesBtn.Text = "Unselect all files";
+            }
+            else
+            {
+                for (int i = 0; i < dataGridViewForFiles.Rows.Count; i++)
+                {
+                    ((DataGridViewCheckBoxCell)dataGridViewForFiles.Rows[i].Cells[0]).Value = false;
+                }
+                selectedAll = false;
+                selectAllFilesBtn.Text = "Select all files";
+            }
+
         }
     }
 }
