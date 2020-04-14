@@ -35,54 +35,29 @@ namespace FileTextSearcher
         /// <param name="sortedListOfWords">Data strucutre to write to file</param>
         public void SaveFile(string filePath, string fileName, IList<string> sortedListOfWords)
         {
-            try
-            {
-                if (filePath != null && fileName!=null && sortedListOfWords != null )
-                {
-                    if (fileName != "")
-                    {
-                        string newFilePath = Path.Combine(filePath, fileName + "_sorted.txt");
-                        if (!File.Exists(newFilePath))
-                        {
-                            using (StreamWriter sw = new StreamWriter(newFilePath))
-                            {
-                                WriteToFile(sw, sortedListOfWords);
-                            }
-                        }
-                        else
-                        {
-                            throw new ArgumentException();
+            int currentFileIteration = 0;
+            bool tryToCreateFile = true;
 
-                        }
-                    }
-                    else
+            fileName = fileName + "_sorted";
+            string tryFileName = fileName;
+            while (tryToCreateFile)
+            {
+                string newFilePath = Path.Combine(filePath, tryFileName + ".txt");
+                if (!File.Exists(newFilePath))
+                {
+                    using (StreamWriter sw = new StreamWriter(newFilePath))
                     {
-                        throw new ArgumentException();
+                        WriteToFile(sw, sortedListOfWords);
                     }
+                    tryToCreateFile = false;
                 }
                 else
                 {
-                    throw new ArgumentNullException();
+                    tryFileName = fileName;
+                    currentFileIteration++;
+                    tryFileName = fileName + " (" + currentFileIteration + ")";
                 }
             }
-            catch (ArgumentNullException e)
-            {
-                throw e;
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                throw e;
-            }
-            catch (IOException e)
-            {
-                throw e;
-            }
-
         }
-
     }
 }
