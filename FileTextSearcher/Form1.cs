@@ -34,6 +34,7 @@ namespace FileTextSearcher
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                Cursor.Current = Cursors.WaitCursor;
                 int counter = 0;
                 foreach (var item in openFileDialog.FileNames)
                 {
@@ -56,7 +57,7 @@ namespace FileTextSearcher
                 searchInputField.Enabled = true;
                 btnClearData.Enabled = true;
                 btnAscDesc.Enabled = true;
-
+                Cursor.Current = Cursors.Default;
                 DisplaySortResult();
             }
         }
@@ -68,6 +69,7 @@ namespace FileTextSearcher
         {
             //clears the data grid view every time DisplaySortResult() is called to prevent
             //it from adding every column again in addition to the already existing ones (duplicate columns) 
+            Cursor.Current = Cursors.WaitCursor;
             dataGridView1.Columns.Clear();
             int maxNumberOfWords = 0;
             foreach (var file in readFiles)
@@ -105,6 +107,7 @@ namespace FileTextSearcher
                     }
                 }
             }
+            Cursor.Current = Cursors.Default;
         }
 
 
@@ -122,6 +125,7 @@ namespace FileTextSearcher
         /// </summary>
         private void ClearData()
         {
+            Cursor.Current = Cursors.WaitCursor;
             readFiles.Clear();
             SortedWords.Clear();
             dataGridView1.Columns.Clear();
@@ -133,6 +137,7 @@ namespace FileTextSearcher
             resultSearch.Text = string.Empty;
             btnSelectFilesToSave.Enabled = false;
             btnAscDesc.Enabled = false;
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -171,7 +176,7 @@ namespace FileTextSearcher
             string resultString = string.Empty;
 
             SearchClass search = new SearchClass();
-
+            Cursor.Current = Cursors.WaitCursor;
             if (searchInputField.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("Please enter a valid input");
@@ -179,9 +184,9 @@ namespace FileTextSearcher
                 searchInputField.Focus();
                 btn_Search.Enabled = false;
             }
-
             else if (word.Length > 0)
             {
+                
                 // List to sort for results
                 List<SearchResult> resultList = new List<SearchResult>();
 
@@ -203,6 +208,7 @@ namespace FileTextSearcher
                     resultString += "\nThe searched word '" + word + "' was found " + result.MatchCount + " times in File: " + result.FileName + " \r";
                 }
             }
+            Cursor.Current = Cursors.Default;
             resultSearch.Text = resultString;
             //Cleares search textbox after each search
             searchInputField.Text = string.Empty;
@@ -215,6 +221,7 @@ namespace FileTextSearcher
         /// <param name="e"></param>
         private void btnAscDesc_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             SortedWords.Clear();
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
@@ -239,6 +246,7 @@ namespace FileTextSearcher
                 }
                 asc = true;
             }
+            Cursor.Current = Cursors.Default;
             DisplaySortResult();
         }
         /// <summary>
