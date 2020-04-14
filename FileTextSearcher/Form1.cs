@@ -241,7 +241,11 @@ namespace FileTextSearcher
             }
             DisplaySortResult();
         }
-
+        /// <summary>
+        /// Clicking in enter in search field triggers the search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void searchInputField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

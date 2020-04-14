@@ -159,6 +159,7 @@
             this.btnAscDesc.Name = "btnAscDesc";
             this.btnAscDesc.Size = new System.Drawing.Size(213, 23);
             this.btnAscDesc.TabIndex = 10;
+            this.btnAscDesc.Enabled = false;
             this.btnAscDesc.Text = "↑ ↓ - Ascending/Descending";
             this.btnAscDesc.UseVisualStyleBackColor = true;
             this.btnAscDesc.Click += new System.EventHandler(this.btnAscDesc_Click);
