@@ -286,6 +286,10 @@ namespace FileTextSearcher
                 }
                 selectedAll = true;
                 selectAllFilesBtn.Text = "Unselect all files";
+                if (GetNumberOfSelectedFiles() > 1)
+                {
+                    mergeBtn.Enabled = true;
+                }
             }
             else
             {
@@ -295,6 +299,7 @@ namespace FileTextSearcher
                 }
                 selectedAll = false;
                 selectAllFilesBtn.Text = "Select all files";
+                mergeBtn.Enabled = false;
             }
 
         }
